@@ -16,3 +16,15 @@ db_seed/
 **/.vscode/
 **/*.spec
 node_modules/
+
+# Debug, Helper & intermediate AI Logs
+engram.exe
+help.txt
+help_utf8.txt
+laia.json
+openapi_dump*.json
+recover-context.bat
+stdout-verify-*.txt
+skills/
+*.png
+*.webp

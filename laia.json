@@ -1,9 +1,0 @@
-{
-    "project_name": "Backend_TFG",
-    "use_ontology": true,
-    "database": "MongoDB",
-    "frontend": "Flutter",
-    "backoffice": "Angular",
-    "use_access_rights": false,
-    "storage": false
-}
