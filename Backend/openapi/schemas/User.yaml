@@ -1,0 +1,26 @@
+User:
+  x-auth: true
+  type: object
+  properties:
+    name:
+      type: string
+      description: User first name
+    surnames:
+      type: string
+      description: User last name
+      nullable: true
+    email:
+      type: string
+      description: User email address
+    password:
+      type: string
+      format: password
+      description: User password
+    phone:
+      type: string
+      description: User phone number
+      nullable: true
+  required:
+    - name
+    - email
+    - password

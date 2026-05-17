@@ -1,0 +1,102 @@
+﻿.venv\Scripts\python.exe
+ : The input file type 
+was determined to be: 
+openapi
+En línea: 1 Carácter: 1
++ .venv\Scripts\python.e
+xe Backend\main.py > 
+stdout-verify-patch.txt 
+2> ...
++ ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo      
+        : NotSpecified: 
+(The     input file ... 
+to be:     
+openapi:String) [], R   
+ emoteException
+    + 
+FullyQualifiedErrorI    
+d : NativeCommandError
+ 
+This can be specified 
+explicitly with the 
+`--input-file-type` 
+option.
+[32;20m2026-04-04 
+20:58:22,633 - (CreateMo
+delsFile.py:59) - INFO 
+- File 'D:\TFG\Backend\B
+ackend\models.py' 
+created and modified. 
+[0m
+[32;20m2026-04-04 
+20:58:22,634 - (CreateRo
+utesFile.py:34) - INFO 
+- Routes file already 
+exists at D:\TFG\Backend
+\Backend\routes.py [0m
+[32;20m2026-04-04 
+20:58:22,690 - (SearchLa
+iaBaseModel.py:9) - 
+INFO - Searching User 
+with filters: {'email': 
+'admin'} [0m
+[32;20m2026-04-04 
+20:58:22,693 - (SearchLa
+iaBaseModel.py:34) - 
+INFO - User search 
+completed successfully 
+[0m
+INFO:     Started 
+server process [36300]
+INFO:     Waiting for 
+application startup.
+INFO:     Application 
+startup complete.
+ERROR:    [Errno 10048] 
+error while attempting 
+to bind on address 
+('0.0.0.0', 8005): 
+[winerror 10048] solo 
+se permite un uso de 
+cada direcci¾n de 
+socket 
+(protocolo/direcci¾n de 
+red/puerto)
+INFO:     Waiting for 
+application shutdown.
+INFO:     Application 
+shutdown complete.
+Registered routes:
+ - /openapi.json ({'HEAD', 'GET'})
+ - /docs ({'HEAD', 'GET'})
+ - /docs/oauth2-redirect ({'HEAD', 'GET'})
+ - /redoc ({'HEAD', 'GET'})
+ - /role/ ({'POST'})
+ - /role/{element_id} ({'PUT'})
+ - /role/{element_id} ({'GET'})
+ - /role/{element_id} ({'DELETE'})
+ - /roles/ ({'POST'})
+ - /auth/register/user/ ({'POST'})
+ - /auth/login/user/ ({'POST'})
+ - /auth/verify/user/{token} ({'GET'})
+ - /user/ ({'POST'})
+ - /user/{element_id} ({'PUT'})
+ - /user/{element_id} ({'GET'})
+ - /user/{element_id} ({'DELETE'})
+ - /users/ ({'POST'})
+ - /wallet/ ({'POST'})
+ - /wallet/{element_id} ({'PUT'})
+ - /wallet/{element_id} ({'GET'})
+ - /wallet/{element_id} ({'DELETE'})
+ - /wallets/ ({'POST'})
+ - /accessright/ ({'POST'})
+ - /accessright/{element_id} ({'PUT'})
+ - /accessright/{element_id} ({'GET'})
+ - /accessright/{element_id} ({'DELETE'})
+ - /accessrights/ ({'POST'})
+OpenAPI YAML file saved.
+Server launched, waiting for interruption...
+

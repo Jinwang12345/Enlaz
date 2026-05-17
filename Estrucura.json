@@ -1,0 +1,2756 @@
+{
+  "name": "TFG",
+  "path": "d:\\TFG",
+  "type": "directory",
+  "children": [
+    {
+      "name": "Backend",
+      "type": "folder",
+      "children": [
+        {
+          "name": "backend",
+          "type": "folder",
+          "children": [
+            {
+              "name": "__init__.py",
+              "type": "file"
+            },
+            {
+              "name": "models.py",
+              "type": "file"
+            },
+            {
+              "name": "routes.py",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "name": "openapi",
+          "type": "folder",
+          "children": [
+            {
+              "name": "paths",
+              "type": "folder"
+            },
+            {
+              "name": "schemas",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Transaction.yaml",
+                  "type": "file"
+                },
+                {
+                  "name": "User.yaml",
+                  "type": "file"
+                },
+                {
+                  "name": "Wallet.yaml",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "base.yaml",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "name": "__init__.py",
+          "type": "file"
+        },
+        {
+          "name": "main.py",
+          "type": "file"
+        },
+        {
+          "name": "openapi.yaml",
+          "type": "file"
+        },
+        {
+          "name": "out.txt",
+          "type": "file"
+        },
+        {
+          "name": "out_utf8.txt",
+          "type": "file"
+        },
+        {
+          "name": "stdout-final.txt",
+          "type": "file"
+        },
+        {
+          "name": "stdout.txt",
+          "type": "file"
+        },
+        {
+          "name": "stdout2.txt",
+          "type": "file"
+        },
+        {
+          "name": "stdout3.txt",
+          "type": "file"
+        },
+        {
+          "name": "test_main.py",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "name": "backoffice",
+      "type": "folder"
+    },
+    {
+      "name": "config",
+      "type": "folder",
+      "children": [
+        {
+          "name": "dev.json",
+          "type": "file"
+        },
+        {
+          "name": "prod.json",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "name": "eco-frontend",
+      "type": "folder",
+      "children": [
+        {
+          "name": "eco_local_app",
+          "type": "folder",
+          "children": [
+            {
+              "name": ".dart_tool",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "chrome-device",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Default",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "AutofillStrikeDatabase",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "BudgetDatabase",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ClientCertificates",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Download Service",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "EntryDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Files",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "Sin confirmar 67223.crdownload",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Extension Rules",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Extension Scripts",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Extension State",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Feature Engagement Tracker",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "AvailabilityDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "EventDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "GCM Store",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Encryption",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "CURRENT",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "MANIFEST-000001",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Local Storage",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "leveldb",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "CURRENT",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "MANIFEST-000001",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Network",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Cookies",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Cookies-journal",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Device Bound Sessions",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Device Bound Sessions-journal",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Network Persistent State",
+                              "type": "file"
+                            },
+                            {
+                              "name": "NetworkDataMigrated",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Reporting and NEL",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Reporting and NEL-journal",
+                              "type": "file"
+                            },
+                            {
+                              "name": "TransportSecurity",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Trust Tokens",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Trust Tokens-journal",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "PersistentOriginTrials",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Safe Browsing Network",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "NetworkDataMigrated",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Safe Browsing Cookies",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Safe Browsing Cookies-journal",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Segmentation Platform",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "SegmentInfoDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "SignalDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "SignalStorageConfigDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Service Worker",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Database",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "CURRENT",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "MANIFEST-000001",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "ScriptCache",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "index-dir",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "temp-index",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "name": "the-real-index",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "2cc80dabc69f58b6_0",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "4cb013792b196a35_0",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "4cb013792b196a35_1",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "index",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Session Storage",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Sessions",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Session_13415658470931487",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419785228763608",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419798620996727",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419801303065744",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419802495874338",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419802892612180",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13419803265560486",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13422219272165138",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Session_13422220478101534",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419785243738574",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419798621179033",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419801303232237",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419802496044724",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419802892780903",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13419803265901887",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13422219272335150",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Tabs_13422220478239931",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shared Dictionary",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "db",
+                              "type": "file"
+                            },
+                            {
+                              "name": "db-journal",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Site Characteristics Database",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Sync Data",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LevelDB",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "CURRENT",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "MANIFEST-000001",
+                                  "type": "file"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "WebStorage",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "QuotaManager",
+                              "type": "file"
+                            },
+                            {
+                              "name": "QuotaManager-journal",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "blob_storage",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "0dc98b8c-c667-41c8-9d97-6dc34470fa06",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "224b349d-ca63-4607-9dc6-242045138a53",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "29a9ae1b-d681-42bd-a1cc-ffc681c6388b",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "395b5ed4-9929-4ae5-b34e-9d7727b053ce",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "46671478-e7ba-4fa4-802d-c01484c43b9e",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "b09be3e9-2e25-4c96-b4be-f1dba7a2fcd0",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "dfbe5ac0-eba5-415e-b499-aa36632adbb2",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "f809efd1-a8d9-48c0-b270-b1ac26bcca6d",
+                              "type": "folder"
+                            },
+                            {
+                              "name": "fdb37135-5d7d-4da5-a1da-8bb9ac043bef",
+                              "type": "folder"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "chrome_cart_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "commerce_subscription_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "discount_infos_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "discounts_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "optimization_guide_hint_cache_store",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "parcel_tracking_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "shared_proto_db",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "metadata",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "CURRENT",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOCK",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "LOG.old",
+                                  "type": "file"
+                                },
+                                {
+                                  "name": "MANIFEST-000001",
+                                  "type": "file"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "000005.ldb",
+                              "type": "file"
+                            },
+                            {
+                              "name": "CURRENT",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOCK",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LOG.old",
+                              "type": "file"
+                            },
+                            {
+                              "name": "MANIFEST-000001",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Account Web Data",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Account Web Data-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Affiliation Database",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Affiliation Database-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "BookmarkMergedSurfaceOrdering",
+                          "type": "file"
+                        },
+                        {
+                          "name": "BrowsingTopicsSiteData",
+                          "type": "file"
+                        },
+                        {
+                          "name": "BrowsingTopicsSiteData-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "BrowsingTopicsState",
+                          "type": "file"
+                        },
+                        {
+                          "name": "DIPS",
+                          "type": "file"
+                        },
+                        {
+                          "name": "DIPS-wal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Favicons",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Favicons-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "History",
+                          "type": "file"
+                        },
+                        {
+                          "name": "History-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "LOCK",
+                          "type": "file"
+                        },
+                        {
+                          "name": "LOG",
+                          "type": "file"
+                        },
+                        {
+                          "name": "LOG.old",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Login Data",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Login Data For Account",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Login Data For Account-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Login Data-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Network Action Predictor",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Network Action Predictor-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Preferences",
+                          "type": "file"
+                        },
+                        {
+                          "name": "PreferredApps",
+                          "type": "file"
+                        },
+                        {
+                          "name": "README",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Secure Preferences",
+                          "type": "file"
+                        },
+                        {
+                          "name": "ServerCertificate",
+                          "type": "file"
+                        },
+                        {
+                          "name": "ServerCertificate-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "SharedStorage",
+                          "type": "file"
+                        },
+                        {
+                          "name": "SharedStorage-wal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Shortcuts",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Shortcuts-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Top Sites",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Top Sites-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Web Data",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Web Data-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "heavy_ad_intervention_opt_out.db",
+                          "type": "file"
+                        },
+                        {
+                          "name": "heavy_ad_intervention_opt_out.db-journal",
+                          "type": "file"
+                        },
+                        {
+                          "name": "passkey_enclave_state",
+                          "type": "file"
+                        },
+                        {
+                          "name": "trusted_vault.pb",
+                          "type": "file"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "dartpad",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "web_plugin_registrant.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "extension_discovery",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "vs_code.json",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "flutter_build",
+                  "type": "folder"
+                },
+                {
+                  "name": "hooks_runner",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "objective_c",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "337ce265dcc475d72fd7c043591321ec",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": ".lock",
+                              "type": "file"
+                            },
+                            {
+                              "name": "dependencies.dependencies_hash_file.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "hook.dependencies_hash_file.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "hook.dill",
+                              "type": "file"
+                            },
+                            {
+                              "name": "hook.dill.d",
+                              "type": "file"
+                            },
+                            {
+                              "name": "input.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "output.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "stderr.txt",
+                              "type": "file"
+                            },
+                            {
+                              "name": "stdout.txt",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "shared",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "objective_c",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": ".lock",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "package_config.json",
+                  "type": "file"
+                },
+                {
+                  "name": "package_graph.json",
+                  "type": "file"
+                },
+                {
+                  "name": "version",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "android",
+              "type": "folder",
+              "children": [
+                {
+                  "name": ".gradle",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "8.14",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "checksums",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "checksums.lock",
+                              "type": "file"
+                            },
+                            {
+                              "name": "md5-checksums.bin",
+                              "type": "file"
+                            },
+                            {
+                              "name": "sha1-checksums.bin",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "expanded",
+                          "type": "folder"
+                        },
+                        {
+                          "name": "fileChanges",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "last-build.bin",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "fileHashes",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "fileHashes.bin",
+                              "type": "file"
+                            },
+                            {
+                              "name": "fileHashes.lock",
+                              "type": "file"
+                            },
+                            {
+                              "name": "resourceHashesCache.bin",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "vcsMetadata",
+                          "type": "folder"
+                        },
+                        {
+                          "name": "gc.properties",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "buildOutputCleanup",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "buildOutputCleanup.lock",
+                          "type": "file"
+                        },
+                        {
+                          "name": "cache.properties",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "noVersion",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "buildLogic.lock",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "vcs-1",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "gc.properties",
+                          "type": "file"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "app",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "src",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "debug",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "AndroidManifest.xml",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "main",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "java",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "io",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "flutter",
+                                      "type": "folder",
+                                      "children": [
+                                        {
+                                          "name": "plugins",
+                                          "type": "folder",
+                                          "children": [
+                                            {
+                                              "name": "GeneratedPluginRegistrant.java",
+                                              "type": "file"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "kotlin",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "com",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "example",
+                                      "type": "folder",
+                                      "children": [
+                                        {
+                                          "name": "eco_local_app",
+                                          "type": "folder",
+                                          "children": [
+                                            {
+                                              "name": "MainActivity.kt",
+                                              "type": "file"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "res",
+                              "type": "folder",
+                              "children": [
+                                {
+                                  "name": "drawable",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "launch_background.xml",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "drawable-v21",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "launch_background.xml",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "mipmap-hdpi",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "ic_launcher.png",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "mipmap-mdpi",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "ic_launcher.png",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "mipmap-xhdpi",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "ic_launcher.png",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "mipmap-xxhdpi",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "ic_launcher.png",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "mipmap-xxxhdpi",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "ic_launcher.png",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "values",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "styles.xml",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "values-night",
+                                  "type": "folder",
+                                  "children": [
+                                    {
+                                      "name": "styles.xml",
+                                      "type": "file"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "AndroidManifest.xml",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "profile",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "AndroidManifest.xml",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "build.gradle.kts",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "gradle",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "wrapper",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "gradle-wrapper.jar",
+                          "type": "file"
+                        },
+                        {
+                          "name": "gradle-wrapper.properties",
+                          "type": "file"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": ".gitignore",
+                  "type": "file"
+                },
+                {
+                  "name": "build.gradle.kts",
+                  "type": "file"
+                },
+                {
+                  "name": "eco_local_app_android.iml",
+                  "type": "file"
+                },
+                {
+                  "name": "gradle.properties",
+                  "type": "file"
+                },
+                {
+                  "name": "gradlew",
+                  "type": "file"
+                },
+                {
+                  "name": "gradlew.bat",
+                  "type": "file"
+                },
+                {
+                  "name": "local.properties",
+                  "type": "file"
+                },
+                {
+                  "name": "settings.gradle.kts",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "ios",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Flutter",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "ephemeral",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "flutter_lldb_helper.py",
+                          "type": "file"
+                        },
+                        {
+                          "name": "flutter_lldbinit",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "AppFrameworkInfo.plist",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Debug.xcconfig",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Generated.xcconfig",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Release.xcconfig",
+                      "type": "file"
+                    },
+                    {
+                      "name": "flutter_export_environment.sh",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Assets.xcassets",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "AppIcon.appiconset",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Contents.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-1024x1024@1x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-20x20@1x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-20x20@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-20x20@3x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-29x29@1x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-29x29@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-29x29@3x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-40x40@1x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-40x40@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-40x40@3x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-60x60@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-60x60@3x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-76x76@1x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-76x76@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "Icon-App-83.5x83.5@2x.png",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "LaunchImage.imageset",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Contents.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LaunchImage.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LaunchImage@2x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "LaunchImage@3x.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "README.md",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Base.lproj",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "LaunchScreen.storyboard",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Main.storyboard",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "AppDelegate.swift",
+                      "type": "file"
+                    },
+                    {
+                      "name": "GeneratedPluginRegistrant.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "GeneratedPluginRegistrant.m",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Info.plist",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Runner-Bridging-Header.h",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner.xcodeproj",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "project.xcworkspace",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "xcshareddata",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "IDEWorkspaceChecks.plist",
+                              "type": "file"
+                            },
+                            {
+                              "name": "WorkspaceSettings.xcsettings",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "contents.xcworkspacedata",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "xcshareddata",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "xcschemes",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Runner.xcscheme",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "project.pbxproj",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner.xcworkspace",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "xcshareddata",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "IDEWorkspaceChecks.plist",
+                          "type": "file"
+                        },
+                        {
+                          "name": "WorkspaceSettings.xcsettings",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "contents.xcworkspacedata",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "RunnerTests",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "RunnerTests.swift",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": ".gitignore",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "lib",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "config",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "router.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "theme.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "core",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "theme",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "app_colors.dart",
+                          "type": "file"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "data",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "models",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "user_model.dart",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "services",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "api_service.dart",
+                          "type": "file"
+                        },
+                        {
+                          "name": "wallet_service.dart",
+                          "type": "file"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "models",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "product_model.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "transaction_model.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "user_model.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "wallet_model.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "presentation",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "screens",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "auth",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "login_screen.dart",
+                              "type": "file"
+                            },
+                            {
+                              "name": "register_screen.dart",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "providers",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "cart_provider.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "user_provider.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "wallet_provider.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "screens",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "chat_screen.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "contacts_screen.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "dashboard_web.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "discover_screen.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "home_screen.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "product_detail.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "profile_menu_screen.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "wallet_login.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "services",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "api_service.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "widgets",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "custom_button.dart",
+                      "type": "file"
+                    },
+                    {
+                      "name": "dpp_card.dart",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "main.dart",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "linux",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "flutter",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "CMakeLists.txt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugin_registrant.cc",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugin_registrant.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugins.cmake",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "runner",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "CMakeLists.txt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "main.cc",
+                      "type": "file"
+                    },
+                    {
+                      "name": "my_application.cc",
+                      "type": "file"
+                    },
+                    {
+                      "name": "my_application.h",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": ".gitignore",
+                  "type": "file"
+                },
+                {
+                  "name": "CMakeLists.txt",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "macos",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Flutter",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "ephemeral",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "Flutter-Generated.xcconfig",
+                          "type": "file"
+                        },
+                        {
+                          "name": "flutter_export_environment.sh",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Flutter-Debug.xcconfig",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Flutter-Release.xcconfig",
+                      "type": "file"
+                    },
+                    {
+                      "name": "GeneratedPluginRegistrant.swift",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Assets.xcassets",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "AppIcon.appiconset",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Contents.json",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_1024.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_128.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_16.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_256.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_32.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_512.png",
+                              "type": "file"
+                            },
+                            {
+                              "name": "app_icon_64.png",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Base.lproj",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "MainMenu.xib",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Configs",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "AppInfo.xcconfig",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Debug.xcconfig",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Release.xcconfig",
+                          "type": "file"
+                        },
+                        {
+                          "name": "Warnings.xcconfig",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "AppDelegate.swift",
+                      "type": "file"
+                    },
+                    {
+                      "name": "DebugProfile.entitlements",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Info.plist",
+                      "type": "file"
+                    },
+                    {
+                      "name": "MainFlutterWindow.swift",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Release.entitlements",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner.xcodeproj",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "project.xcworkspace",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "xcshareddata",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "IDEWorkspaceChecks.plist",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "xcshareddata",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "xcschemes",
+                          "type": "folder",
+                          "children": [
+                            {
+                              "name": "Runner.xcscheme",
+                              "type": "file"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "project.pbxproj",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "Runner.xcworkspace",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "xcshareddata",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "IDEWorkspaceChecks.plist",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "contents.xcworkspacedata",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "RunnerTests",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "RunnerTests.swift",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": ".gitignore",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "test",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "widget_test.dart",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "web",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "icons",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Icon-192.png",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Icon-512.png",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Icon-maskable-192.png",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Icon-maskable-512.png",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "favicon.png",
+                  "type": "file"
+                },
+                {
+                  "name": "index.html",
+                  "type": "file"
+                },
+                {
+                  "name": "manifest.json",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": "windows",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "flutter",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "ephemeral",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": ".plugin_symlinks",
+                          "type": "folder"
+                        },
+                        {
+                          "name": "generated_config.cmake",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "CMakeLists.txt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugin_registrant.cc",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugin_registrant.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "generated_plugins.cmake",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": "runner",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "resources",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "app_icon.ico",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "CMakeLists.txt",
+                      "type": "file"
+                    },
+                    {
+                      "name": "Runner.rc",
+                      "type": "file"
+                    },
+                    {
+                      "name": "flutter_window.cpp",
+                      "type": "file"
+                    },
+                    {
+                      "name": "flutter_window.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "main.cpp",
+                      "type": "file"
+                    },
+                    {
+                      "name": "resource.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "runner.exe.manifest",
+                      "type": "file"
+                    },
+                    {
+                      "name": "utils.cpp",
+                      "type": "file"
+                    },
+                    {
+                      "name": "utils.h",
+                      "type": "file"
+                    },
+                    {
+                      "name": "win32_window.cpp",
+                      "type": "file"
+                    },
+                    {
+                      "name": "win32_window.h",
+                      "type": "file"
+                    }
+                  ]
+                },
+                {
+                  "name": ".gitignore",
+                  "type": "file"
+                },
+                {
+                  "name": "CMakeLists.txt",
+                  "type": "file"
+                }
+              ]
+            },
+            {
+              "name": ".flutter-plugins-dependencies",
+              "type": "file"
+            },
+            {
+              "name": ".gitignore",
+              "type": "file"
+            },
+            {
+              "name": ".metadata",
+              "type": "file"
+            },
+            {
+              "name": "README.md",
+              "type": "file"
+            },
+            {
+              "name": "analysis_options.yaml",
+              "type": "file"
+            },
+            {
+              "name": "eco_local_app.iml",
+              "type": "file"
+            },
+            {
+              "name": "pubspec.lock",
+              "type": "file"
+            },
+            {
+              "name": "pubspec.yaml",
+              "type": "file"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "frontend",
+      "type": "folder"
+    },
+    {
+      "name": "skills",
+      "type": "folder",
+      "children": [
+        {
+          "name": "01_arquitectura_o2o.md",
+          "type": "file"
+        },
+        {
+          "name": "02_frontend_flutter.md",
+          "type": "file"
+        },
+        {
+          "name": "03_backend_laia.md",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "name": ".agent.md",
+      "type": "file"
+    },
+    {
+      "name": ".instructions.md",
+      "type": "file"
+    },
+    {
+      "name": "241021_censcomercialbcn_opendata_2024_v5.csv",
+      "type": "file"
+    },
+    {
+      "name": "AGENT.md",
+      "type": "file"
+    },
+    {
+      "name": "Siguiente paso.txt",
+      "type": "file"
+    },
+    {
+      "name": "Tree.md",
+      "type": "file"
+    },
+    {
+      "name": "context.txt",
+      "type": "file"
+    },
+    {
+      "name": "context_utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "db_dump.txt",
+      "type": "file"
+    },
+    {
+      "name": "db_dump_utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "docker-compose.yaml",
+      "type": "file"
+    },
+    {
+      "name": "engram.exe",
+      "type": "file"
+    },
+    {
+      "name": "help.txt",
+      "type": "file"
+    },
+    {
+      "name": "help_utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "init-replica.js",
+      "type": "file"
+    },
+    {
+      "name": "laia.json",
+      "type": "file"
+    },
+    {
+      "name": "openapi_dump.json",
+      "type": "file"
+    },
+    {
+      "name": "openapi_dump2.json",
+      "type": "file"
+    },
+    {
+      "name": "recover-context.bat",
+      "type": "file"
+    },
+    {
+      "name": "requirements.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-auth-fixed-utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-auth-fixed.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-auth-utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-auth.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-patch-final-utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-patch-final.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-patch-utf8.txt",
+      "type": "file"
+    },
+    {
+      "name": "stdout-verify-patch.txt",
+      "type": "file"
+    }
+  ],
+  "metadata": {
+    "generated": "2026-05-12T17:12:46.711Z",
+    "generator": "FileTree Pro Extension",
+    "version": "0.2.0",
+    "showIcons": false,
+    "maxDepth": 10
+  }
+}

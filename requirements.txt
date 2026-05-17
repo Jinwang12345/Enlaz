@@ -1,0 +1,24 @@
+# necessary for builing the python library
+wheel
+setuptools
+twine
+
+# necessary for testing
+pytest
+pytest-runner
+
+pydantic
+fastapi
+pymongo
+bcrypt
+
+laia-gen-lib
+nest_asyncio
+
+python-dotenv
+uvicorn
+
+rdflib
+
+boto3
+werkzeug

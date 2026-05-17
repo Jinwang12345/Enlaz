@@ -1,0 +1,14 @@
+﻿## Memory from Previous Sessions
+
+### Recent Sessions
+- **TFG-LAIA-Backend** (2026-04-04 16:38:11) [1 observations]
+
+### Recent Observations
+- [session_summary] **Session summary: TFG-LAIA-Backend**: ## Goal
+Fix LAIA FastAPI backend User model and endpoints to handle MongoDB-generated IDs and optional fields correctly without validation errors.
+
+## Instructions
+- Backend path: d:\TFG\Backend
+- Use relative paths with Path() class instead of os.path.join()
+- LaiaFastApi requires: use_ontology=Fal...
+

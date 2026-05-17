@@ -1,0 +1,25 @@
+Wallet:
+  type: object
+  properties:
+    address:
+      type: string
+      description: The wallet address
+      x_required: true
+      x_unique: true
+    balance:
+      type: number
+      format: float
+      default: 0.0
+      description: The wallet balance
+    currency:
+      type: string
+      default: USD
+      description: The wallet currency
+    user_id:
+      type: string
+      description: The user ID
+      x_required: true
+      x_type: objectId
+  required:
+    - address
+    - user_id

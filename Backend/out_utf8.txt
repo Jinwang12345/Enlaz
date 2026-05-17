@@ -1,0 +1,1 @@
+﻿(self, openapi, backend_folder_name, db, repository: laiagenlib.Domain.LaiaBaseModel.ModelRepository.ModelRepository, repositoryAPI: laiagenlib.Domain.Openapi.OpenapiRepository.OpenapiRepository, jwtSecretKey: str = 'secret_key')

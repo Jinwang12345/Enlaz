@@ -1,0 +1,22 @@
+{
+    "mongo": {
+        "url": "mongodb://localhost:27017",
+        "database": "test"
+    },
+    "jwt": {
+        "secret_key": "secret1",
+        "refresh_secret_key": "secret2"
+    },
+    "server": {
+        "port": 8005,
+        "base_uri_prefix": "http://localhost:8005"
+    },
+    "storage": {
+        "enabled": false
+    },
+    "fuseki": {
+        "base_url": "http://localhost:3030",
+        "user": "admin",
+        "password": "admin"
+    }
+}

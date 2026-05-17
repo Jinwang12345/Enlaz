@@ -1,0 +1,10 @@
+﻿{'role': [{'_id': ObjectId('69c82f872eb9c62c7e5ad0c3'),
+           'name': 'admin',
+           'nicename': None,
+           'owner': None}],
+ 'user': [{'_id': ObjectId('69c82f872eb9c62c7e5ad0c4'),
+           'email': 'admin',
+           'name': 'Admin',
+           'password': b'$2b$12$g9Y4NQbzwkU77YOleMHmIepLHqZPy2h48q4dJHzgBVXck'
+                       b'aX5XqG7C',
+           'roles': ['69c82f872eb9c62c7e5ad0c3']}]}

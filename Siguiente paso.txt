@@ -1,0 +1,2 @@
+Hacer un mapa de locales cercanos.-- mas importante, usar mapeo y buscar base de datos de locales https://opendata-ajuntament.barcelona.cat/ca/cataleg-de-dades/dada/comercios-cerca-realtime-amb-latitud-i-longitud
+websockets

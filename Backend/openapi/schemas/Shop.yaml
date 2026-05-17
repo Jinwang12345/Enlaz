@@ -1,0 +1,32 @@
+Shop:
+  type: object
+  properties:
+    name:
+      type: string
+    activity:
+      type: string
+    category:
+      type: string
+    address:
+      type: string
+    neighborhood:
+      type: string
+    is_commercial_axis:
+      type: boolean
+    location:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Point]
+        coordinates:
+          type: array
+          items:
+            type: number
+      required:
+        - type
+        - coordinates
+  required:
+    - name
+    - category
+    - location

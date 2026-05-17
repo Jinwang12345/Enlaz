@@ -1,0 +1,31 @@
+Transaction:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: User ID
+      x_required: true
+      x_type: objectId
+    amount:
+      type: number
+      format: float
+      description: Transaction amount (positive for credit, negative for debit)
+    type:
+      type: string
+      description: Transaction type (topup, send, receive, payment)
+    description:
+      type: string
+      description: Transaction description
+    counterparty:
+      type: string
+      description: Email or ID of the other user
+      nullable: true
+    created_at:
+      type: string
+      format: date-time
+      description: Transaction date and time
+  required:
+    - user_id
+    - amount
+    - type
+    - description

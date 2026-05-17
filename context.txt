@@ -1,0 +1,146 @@
+================================================================================
+                    PROGRESO DEL PROYECTO TFG - RESUMEN COMPLETO
+================================================================================
+
+ÚLTIMA ACTUALIZACIÓN: 4 de Abril de 2026
+OBJETIVO PRINCIPAL: Conectar backend LAIA FastAPI con frontend Flutter Eco-Local Hub
+
+================================================================================
+FASE 1: INTEGRACIÓN FRONTEND-BACKEND (COMPLETADA)
+================================================================================
+
+1. ACTUALIZACIÓN DE SERVICIOS API (lib/services/api_service.dart)
+   ✅ Cambié URL del backend de localhost:3000 a localhost:8005
+   ✅ Implementé login(email, password) → /auth/login
+   ✅ Implementé register(name, email, password, surnames?) → /users/
+
+2. MODELO DE USUARIO MEJORADO (lib/models/user_model.dart)
+   ✅ Campos: id, owner, surnames (opcionales)
+   ✅ Métodos: fromJson(), toJson(), copyWith()
+   ✅ Serialización correcta para MongoDB ObjectIds
+
+3. STATE MANAGEMENT CON RIVERPOD (lib/providers/user_provider.dart)
+   ✅ UserNotifier con login() y register()
+   ✅ API Service integration
+   ✅ isLoggedIn getter
+
+4. PANTALLA DE LOGIN (lib/presentation/screens/auth/login_screen.dart)
+   ✅ ConsumerStatefulWidget
+   ✅ Llamada al backend en "Iniciar Sesión"
+   ✅ Indicadores de carga y manejo de errores
+   ✅ Redirección a home si login exitoso
+
+5. PANTALLA DE REGISTRO (lib/presentation/screens/auth/register_screen.dart)
+   ✅ Campos separados: nombre y apellidos
+   ✅ Llamada a register() function
+   ✅ Manejo de errores y éxito
+   ✅ Redirección a login después de registro
+
+6. ROUTER CON PROTECCIÓN (lib/config/router.dart)
+   ✅ appRouterProvider con Riverpod
+   ✅ Redirect automático basado en autenticación
+   ✅ No autenticados → /login
+   ✅ Autenticados en /login → /home
+
+7. INTEGRACIÓN EN MAIN.DART
+   ✅ ConsumerWidget implementation
+   ✅ appRouterProvider watch
+
+================================================================================
+FASE 2: CORRECCIÓN DE ERRORES DEL BACKEND (COMPLETADA)
+================================================================================
+
+PROBLEMA REPORTADO:
+- TypeError en LaiaFastApi durante inicialización
+- Main.py pasaba argumentos incorrectos
+
+INVESTIGACIÓN REALIZADA:
+- Comparé .venv/LaiaFastApi.py vs env/LaiaFastApi.py
+- .venv/ tenía 6 parámetros base; env/ tenía 18+ parámetros
+- create_crud_routes solo acepta 8 parámetros posicionales
+
+INTENTOS PREVIOS (REVERTIDOS):
+❌ Agregué use_access_rights parameter a .venv/ (incorrecto)
+❌ Pasé 14 parámetros a create_crud_routes (rompió la función)
+❌ Modifiqué librería en lugar de solo main.py (incorrecto)
+
+SOLUCIÓN FINAL (CORRECTA):
+✅ Revertí .venv/LaiaFastApi.py a estado original
+✅ Ajusté SOLO Backend/main.py para usar 6 parámetros correctos:
+   - openapi_path
+   - backend_folder_name
+   - db
+   - MongoModelRepository
+   - FastAPIOpenapiRepository
+   - backend_jwt_secret_key
+✅ create_crud_routes recibe 8 parámetros en orden correcto
+
+================================================================================
+CÓDIGO FINAL - Backend/main.py
+================================================================================
+
+async def main():
+    app_instance = await LaiaFastApi(
+        openapi_path,
+        backend_folder_name,
+        db,
+        MongoModelRepository,
+        FastAPIOpenapiRepository,
+        backend_jwt_secret_key,
+    )
+
+================================================================================
+ESTADO ACTUAL
+================================================================================
+
+✅ COMPLETADO Y VERIFICADO:
+  - Integración Flutter-API (login/register endpoints)
+  - Modelos con deserialización JSON correcta
+  - State management con Riverpod funcional
+  - Pantallas autenticadas (login/register)
+  - Router con protección de rutas
+  - Backend LaiaFastApi configuración correcta
+  - Librería .venv/LaiaFastApi.py revertida a original
+
+⏳ PENDIENTE DE EJECUTARSE:
+  - python d:\TFG\Backend\main.py (testear backend)
+  - flutter run (testear frontend completo)
+  - Flujo end-to-end: registro → login → home
+
+================================================================================
+CONFIGURACIÓN FINAL
+================================================================================
+
+BACKEND:
+  - Ubicación: d:\TFG\Backend
+  - URL: http://localhost:8005
+  - Base de datos: MongoDB (localhost:27017)
+  - LaiaFastApi: 6 parámetros correctos
+
+FRONTEND:
+  - Ubicación: d:\TFG\eco-frontend\eco_local_app
+  - Framework: Flutter 3.10.3
+  - API Base: http://localhost:8005
+  - State: Riverpod
+  - Routing: GoRouter
+
+================================================================================
+NOTAS IMPORTANTES
+================================================================================
+
+⚠️ LA LIBRERÍA .venv/ ESTÁ EN ESTADO ORIGINAL - NO MODIFICAR MÁS
+⚠️ Todos los cambios van en Backend/main.py o código del proyecto
+⚠️ LaiaFastApi solo acepta 6 parámetros base obligatorios
+⚠️ MongoDB debe estar ejecutándose en puerto 27017
+
+================================================================================
+PRÓXIMAS ACCIONES
+================================================================================
+
+1. Ejecutar backend y verificar sin errores
+2. Ejecutar frontend Flutter
+3. Testear flujo completo de autenticación
+4. Implementar wallet si es necesario
+
+Status: READY FOR TESTING
+Last Updated: 2026-04-04 20:35

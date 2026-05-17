@@ -1,0 +1,20 @@
+{
+    "mongo": {
+        "url": "mongodb://mongo:27017",
+        "database": "prod_db"
+    },
+    "jwt": {
+        "secret_key": "prod_secret_1",
+        "refresh_secret_key": "prod_secret_2"
+    },
+    "server": {
+        "port": 8005,
+        "base_uri_prefix": "https://api.example.com"
+    },
+    "storage": {},
+    "fuseki": {
+        "base_url": "https://fuseki.example.com",
+        "user": "admin",
+        "password": "supersecret"
+    }
+}

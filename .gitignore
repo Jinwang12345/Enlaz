@@ -1,0 +1,18 @@
+# Python (Backend)
+**/__pycache__/
+**/.venv/
+**/venv/
+**/env/
+**/*.pyc
+.env
+db_seed/
+
+# Flutter (Frontend)
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.idea/
+**/.vscode/
+**/*.spec
+node_modules/

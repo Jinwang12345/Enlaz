@@ -1,0 +1,27 @@
+services:
+  mongo:
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    image: mongo:8.0
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init-replica.js:/docker-entrypoint-initdb.d/init-replica.js:ro
+      - mongo_data:/data/db
+
+
+  jena-fuseki:
+    image: stain/jena-fuseki
+    container_name: jena-fuseki
+    platform: linux/amd64
+    ports:
+      - "3030:3030"
+    environment:
+      - ADMIN_PASSWORD=admin
+    volumes:
+      - ./init-replica.js:/docker-entrypoint-initdb.d/init-replica.js:ro
+      - jena_data:/fuseki
+volumes:
+  mongo_data:  
+  jena_data:

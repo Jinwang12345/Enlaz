@@ -1,0 +1,1807 @@
+components:
+  schemas:
+    AccessRight:
+      properties:
+        fields_create:
+          additionalProperties: true
+          default: {}
+          title: Fields Create
+          type: object
+          x_frontend_fieldName: Fields Creation
+          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
+            ...}'
+        fields_edit:
+          additionalProperties: true
+          default: {}
+          title: Fields Edit
+          type: object
+          x_frontend_fieldName: Fields Edition
+          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
+            ...}'
+        fields_visible:
+          additionalProperties: true
+          default: {}
+          title: Fields Visible
+          type: object
+          x_frontend_fieldName: Fields Visibility
+          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
+            ...}'
+        id:
+          default: ''
+          title: Id
+          type: string
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Model
+          x_frontend_fieldName: Model
+          x_frontend_widget: ModelsSelectableWidget
+        name:
+          default: ''
+          title: Name
+          type: string
+        operations:
+          additionalProperties: true
+          default: {}
+          title: Operations
+          type: object
+          x_frontend_fieldName: Operations Permitted
+          x_frontend_placeholder: '{''create'': 1, ''read'': 1, ''update'': 0, ''delete'':
+            0, ''search'': 1}'
+        owner:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Owner
+          x_frontend_fieldName: Only applies to own records
+        role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Role
+          x_frontend_fieldName: Role
+          x_frontend_relation: Role
+      title: AccessRight
+      type: object
+    Auth:
+      properties:
+        email:
+          title: Email
+          type: string
+        password:
+          title: Password
+          type: string
+      required:
+      - email
+      - password
+      title: Auth
+      type: object
+    Body_search_access_rights_accessrights__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_access_rights_accessrights__post
+      type: object
+    Body_search_element_roles__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_element_roles__post
+      type: object
+    Body_search_element_shops__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_element_shops__post
+      type: object
+    Body_search_element_transactions__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_element_transactions__post
+      type: object
+    Body_search_element_users__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_element_users__post
+      type: object
+    Body_search_element_wallets__post:
+      properties:
+        filters:
+          additionalProperties: true
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          additionalProperties: true
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_element_wallets__post
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    Location:
+      properties:
+        coordinates:
+          items:
+            type: number
+          title: Coordinates
+          type: array
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        owner:
+          default: ''
+          title: Owner
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+      required:
+      - name
+      - type
+      - coordinates
+      title: Location
+      type: object
+    PayRequest:
+      properties:
+        amount:
+          title: Amount
+          type: number
+        merchant:
+          title: Merchant
+          type: string
+      required:
+      - amount
+      - merchant
+      title: PayRequest
+      type: object
+    Role:
+      properties:
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        owner:
+          default: ''
+          title: Owner
+          type: string
+      required:
+      - name
+      title: Role
+      type: object
+    SendRequest:
+      properties:
+        amount:
+          title: Amount
+          type: number
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: Transfer
+          title: Description
+        recipient_email:
+          title: Recipient Email
+          type: string
+      required:
+      - recipient_email
+      - amount
+      title: SendRequest
+      type: object
+    Shop:
+      properties:
+        activity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Activity
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        category:
+          title: Category
+          type: string
+        id:
+          default: ''
+          title: Id
+          type: string
+        is_commercial_axis:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Commercial Axis
+        location:
+          $ref: '#/components/schemas/Location'
+        name:
+          title: Name
+          type: string
+        neighborhood:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Neighborhood
+        owner:
+          default: ''
+          title: Owner
+          type: string
+      required:
+      - name
+      - category
+      - location
+      title: Shop
+      type: object
+    TopUpRequest:
+      properties:
+        amount:
+          title: Amount
+          type: number
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: Wallet Top-up
+          title: Description
+      required:
+      - amount
+      title: TopUpRequest
+      type: object
+    Transaction:
+      properties:
+        amount:
+          description: Transaction amount (positive for credit, negative for debit)
+          title: Amount
+          type: number
+        counterparty:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Email or ID of the other user
+          title: Counterparty
+        created_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          description: Transaction date and time
+          title: Created At
+        description:
+          description: Transaction description
+          title: Description
+          type: string
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        owner:
+          default: ''
+          title: Owner
+          type: string
+        type:
+          description: Transaction type (topup, send, receive, payment)
+          title: Type
+          type: string
+        user_id:
+          description: User ID
+          title: User Id
+          type: string
+          x_required: true
+          x_type: objectId
+      required:
+      - name
+      - user_id
+      - amount
+      - type
+      - description
+      title: Transaction
+      type: object
+    Type:
+      enum:
+      - Point
+      - LineString
+      - Polygon
+      - MultiPoint
+      - MultiLineString
+      - MultiPolygon
+      title: Type
+      type: string
+    User:
+      properties:
+        email:
+          description: User email address
+          title: Email
+          type: string
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          description: User first name
+          title: Name
+          type: string
+        owner:
+          default: ''
+          title: Owner
+          type: string
+        password:
+          description: User password
+          format: password
+          title: Password
+          type: string
+          writeOnly: true
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: User phone number
+          title: Phone
+        roles:
+          default: []
+          items:
+            type: string
+          title: Roles
+          type: array
+          x_frontend_relation: Role
+        surnames:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: User last name
+          title: Surnames
+      required:
+      - name
+      - email
+      - password
+      title: User
+      type: object
+      x-auth: true
+    ValidationError:
+      properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+    Wallet:
+      properties:
+        address:
+          description: The wallet address
+          title: Address
+          type: string
+          x_required: true
+          x_unique: true
+        balance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: 0.0
+          description: The wallet balance
+          title: Balance
+        currency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: USD
+          description: The wallet currency
+          title: Currency
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        owner:
+          default: ''
+          title: Owner
+          type: string
+        user_id:
+          description: The user ID
+          title: User Id
+          type: string
+          x_required: true
+          x_type: objectId
+      required:
+      - name
+      - address
+      - user_id
+      title: Wallet
+      type: object
+    WalletResponse:
+      properties:
+        balance:
+          title: Balance
+          type: number
+        currency:
+          title: Currency
+          type: string
+        transactions:
+          items:
+            additionalProperties: true
+            type: object
+          title: Transactions
+          type: array
+      required:
+      - balance
+      - currency
+      - transactions
+      title: WalletResponse
+      type: object
+  securitySchemes:
+    OAuth2PasswordBearer:
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: token
+      type: oauth2
+info:
+  title: FastAPI
+  version: 0.1.0
+openapi: 3.1.0
+paths:
+  /accessright/:
+    post:
+      operationId: create_access_rights_route_accessright__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessRight'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Access Rights Route
+      tags:
+      - AccessRight
+  /accessright/{element_id}:
+    delete:
+      operationId: delete_access_rights_accessright__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Access Rights Accessright  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Access Rights
+      tags:
+      - AccessRight
+    get:
+      operationId: read_access_rights_accessright__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Access Rights Accessright  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Access Rights
+      tags:
+      - AccessRight
+    put:
+      operationId: update_access_rights_accessright__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Access Rights Accessright  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Access Rights
+      tags:
+      - AccessRight
+  /accessrights/:
+    post:
+      operationId: search_access_rights_accessrights__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_access_rights_accessrights__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Access Rights Accessrights  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Access Rights
+      tags:
+      - AccessRight
+  /auth/login/user/:
+    post:
+      operationId: login_user_auth_login_user__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Login User Auth Login User  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Login User
+      tags:
+      - User
+  /auth/register/user/:
+    post:
+      operationId: register_user_auth_register_user__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Register User Auth Register User  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Register User
+      tags:
+      - User
+  /auth/verify/user/{token}:
+    get:
+      operationId: verify_user_auth_verify_user__token__get
+      parameters:
+      - in: path
+        name: token
+        required: true
+        schema:
+          title: Token
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Verify User Auth Verify User  Token  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Verify User
+      tags:
+      - User
+  /role/:
+    post:
+      operationId: create_element_role__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Element Role  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Element
+      tags:
+      - Role
+  /role/{element_id}:
+    delete:
+      operationId: delete_element_role__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Element Role  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Element
+      tags:
+      - Role
+    get:
+      operationId: read_element_role__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Element Role  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Element
+      tags:
+      - Role
+    put:
+      operationId: update_element_role__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Element Role  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Element
+      tags:
+      - Role
+  /roles/:
+    post:
+      operationId: search_element_roles__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_element_roles__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Element Roles  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Element
+      tags:
+      - Role
+  /shop/:
+    post:
+      operationId: create_element_shop__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shop'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Element Shop  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Element
+      tags:
+      - Shop
+  /shop/{element_id}:
+    delete:
+      operationId: delete_element_shop__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Element Shop  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Element
+      tags:
+      - Shop
+    get:
+      operationId: read_element_shop__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Element Shop  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Element
+      tags:
+      - Shop
+    put:
+      operationId: update_element_shop__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Element Shop  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Element
+      tags:
+      - Shop
+  /shops/:
+    post:
+      operationId: search_element_shops__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_element_shops__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Element Shops  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Element
+      tags:
+      - Shop
+  /transaction/:
+    post:
+      operationId: create_element_transaction__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Element Transaction  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Element
+      tags:
+      - Transaction
+  /transaction/{element_id}:
+    delete:
+      operationId: delete_element_transaction__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Element Transaction  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Element
+      tags:
+      - Transaction
+    get:
+      operationId: read_element_transaction__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Element Transaction  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Element
+      tags:
+      - Transaction
+    put:
+      operationId: update_element_transaction__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Element Transaction  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Element
+      tags:
+      - Transaction
+  /transactions/:
+    post:
+      operationId: search_element_transactions__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_element_transactions__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Element Transactions  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Element
+      tags:
+      - Transaction
+  /user/:
+    post:
+      operationId: create_element_user__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Element User  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Element
+      tags:
+      - User
+  /user/{element_id}:
+    delete:
+      operationId: delete_element_user__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Element User  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Element
+      tags:
+      - User
+    get:
+      operationId: read_element_user__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Element User  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Element
+      tags:
+      - User
+    put:
+      operationId: update_element_user__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Element User  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Element
+      tags:
+      - User
+  /users/:
+    post:
+      operationId: search_element_users__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_element_users__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Element Users  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Element
+      tags:
+      - User
+  /wallet/:
+    get:
+      operationId: get_wallet_wallet__get
+      parameters:
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Wallet
+      tags:
+      - Wallet
+    post:
+      operationId: create_element_wallet__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Wallet'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Element Wallet  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Element
+      tags:
+      - Wallet
+  /wallet/pay:
+    post:
+      operationId: pay_wallet_pay_post
+      parameters:
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Pay
+      tags:
+      - Wallet
+  /wallet/send:
+    post:
+      operationId: send_money_wallet_send_post
+      parameters:
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Send Money
+      tags:
+      - Wallet
+  /wallet/shops/nearby:
+    get:
+      operationId: get_nearby_shops_wallet_shops_nearby_get
+      parameters:
+      - in: query
+        name: lat
+        required: true
+        schema:
+          title: Lat
+          type: number
+      - in: query
+        name: lng
+        required: true
+        schema:
+          title: Lng
+          type: number
+      - in: query
+        name: radius
+        required: false
+        schema:
+          default: 100
+          title: Radius
+          type: number
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 40
+          title: Limit
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Nearby Shops
+      tags:
+      - Wallet
+  /wallet/topup:
+    post:
+      operationId: topup_wallet_topup_post
+      parameters:
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopUpRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Topup
+      tags:
+      - Wallet
+  /wallet/transactions:
+    get:
+      operationId: get_transactions_wallet_transactions_get
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          title: Offset
+          type: integer
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Transactions
+      tags:
+      - Wallet
+  /wallet/{element_id}:
+    delete:
+      operationId: delete_element_wallet__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Element Wallet  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Element
+      tags:
+      - Wallet
+    get:
+      operationId: read_element_wallet__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Read Element Wallet  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Element
+      tags:
+      - Wallet
+    put:
+      operationId: update_element_wallet__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              title: Values
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Update Element Wallet  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Element
+      tags:
+      - Wallet
+  /wallets/:
+    post:
+      operationId: search_element_wallets__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_search_element_wallets__post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Search Element Wallets  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Element
+      tags:
+      - Wallet

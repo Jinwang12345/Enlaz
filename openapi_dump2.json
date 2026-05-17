@@ -1,0 +1,1062 @@
+﻿{
+    "openapi":  "3.1.0",
+    "info":  {
+                 "title":  "FastAPI",
+                 "version":  "0.1.0"
+             },
+    "paths":  {
+                  "/role/":  {
+                                 "post":  {
+                                              "tags":  [
+                                                           "Role"
+                                                       ],
+                                              "summary":  "Create Element",
+                                              "operationId":  "create_element_role__post",
+                                              "parameters":  [
+                                                                 {
+                                                                     "name":  "token",
+                                                                     "in":  "query",
+                                                                     "required":  false,
+                                                                     "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                 }
+                                                             ],
+                                              "requestBody":  {
+                                                                  "required":  true,
+                                                                  "content":  {
+                                                                                  "application/json":  "@{schema=}"
+                                                                              }
+                                                              },
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Successful Response",
+                                                                            "content":  "@{application/json=}"
+                                                                        },
+                                                                "422":  {
+                                                                            "description":  "Validation Error",
+                                                                            "content":  "@{application/json=}"
+                                                                        }
+                                                            }
+                                          }
+                             },
+                  "/role/{element_id}":  {
+                                             "put":  {
+                                                         "tags":  [
+                                                                      "Role"
+                                                                  ],
+                                                         "summary":  "Update Element",
+                                                         "operationId":  "update_element_role__element_id__put",
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "element_id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  "@{type=string; title=Element Id}"
+                                                                            },
+                                                                            {
+                                                                                "name":  "token",
+                                                                                "in":  "query",
+                                                                                "required":  false,
+                                                                                "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                            }
+                                                                        ],
+                                                         "requestBody":  {
+                                                                             "required":  true,
+                                                                             "content":  {
+                                                                                             "application/json":  "@{schema=}"
+                                                                                         }
+                                                                         },
+                                                         "responses":  {
+                                                                           "200":  {
+                                                                                       "description":  "Successful Response",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   },
+                                                                           "422":  {
+                                                                                       "description":  "Validation Error",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   }
+                                                                       }
+                                                     },
+                                             "get":  {
+                                                         "tags":  [
+                                                                      "Role"
+                                                                  ],
+                                                         "summary":  "Read Element",
+                                                         "operationId":  "read_element_role__element_id__get",
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "element_id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  "@{type=string; title=Element Id}"
+                                                                            },
+                                                                            {
+                                                                                "name":  "token",
+                                                                                "in":  "query",
+                                                                                "required":  false,
+                                                                                "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                            }
+                                                                        ],
+                                                         "responses":  {
+                                                                           "200":  {
+                                                                                       "description":  "Successful Response",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   },
+                                                                           "422":  {
+                                                                                       "description":  "Validation Error",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   }
+                                                                       }
+                                                     },
+                                             "delete":  {
+                                                            "tags":  [
+                                                                         "Role"
+                                                                     ],
+                                                            "summary":  "Delete Element",
+                                                            "operationId":  "delete_element_role__element_id__delete",
+                                                            "parameters":  [
+                                                                               {
+                                                                                   "name":  "element_id",
+                                                                                   "in":  "path",
+                                                                                   "required":  true,
+                                                                                   "schema":  "@{type=string; title=Element Id}"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "token",
+                                                                                   "in":  "query",
+                                                                                   "required":  false,
+                                                                                   "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                               }
+                                                                           ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Successful Response",
+                                                                                          "content":  "@{application/json=}"
+                                                                                      },
+                                                                              "422":  {
+                                                                                          "description":  "Validation Error",
+                                                                                          "content":  "@{application/json=}"
+                                                                                      }
+                                                                          }
+                                                        }
+                                         },
+                  "/roles/":  {
+                                  "post":  {
+                                               "tags":  [
+                                                            "Role"
+                                                        ],
+                                               "summary":  "Search Element",
+                                               "operationId":  "search_element_roles__post",
+                                               "parameters":  [
+                                                                  {
+                                                                      "name":  "token",
+                                                                      "in":  "query",
+                                                                      "required":  false,
+                                                                      "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                  },
+                                                                  {
+                                                                      "name":  "skip",
+                                                                      "in":  "query",
+                                                                      "required":  false,
+                                                                      "schema":  "@{type=integer; default=0; title=Skip}"
+                                                                  },
+                                                                  {
+                                                                      "name":  "limit",
+                                                                      "in":  "query",
+                                                                      "required":  false,
+                                                                      "schema":  "@{type=integer; default=10; title=Limit}"
+                                                                  }
+                                                              ],
+                                               "requestBody":  {
+                                                                   "content":  {
+                                                                                   "application/json":  "@{schema=}"
+                                                                               }
+                                                               },
+                                               "responses":  {
+                                                                 "200":  {
+                                                                             "description":  "Successful Response",
+                                                                             "content":  "@{application/json=}"
+                                                                         },
+                                                                 "422":  {
+                                                                             "description":  "Validation Error",
+                                                                             "content":  "@{application/json=}"
+                                                                         }
+                                                             }
+                                           }
+                              },
+                  "/user/":  {
+                                 "post":  {
+                                              "tags":  [
+                                                           "User"
+                                                       ],
+                                              "summary":  "Create Element",
+                                              "operationId":  "create_element_user__post",
+                                              "parameters":  [
+                                                                 {
+                                                                     "name":  "token",
+                                                                     "in":  "query",
+                                                                     "required":  false,
+                                                                     "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                 }
+                                                             ],
+                                              "requestBody":  {
+                                                                  "required":  true,
+                                                                  "content":  {
+                                                                                  "application/json":  "@{schema=}"
+                                                                              }
+                                                              },
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Successful Response",
+                                                                            "content":  "@{application/json=}"
+                                                                        },
+                                                                "422":  {
+                                                                            "description":  "Validation Error",
+                                                                            "content":  "@{application/json=}"
+                                                                        }
+                                                            }
+                                          }
+                             },
+                  "/user/{element_id}":  {
+                                             "put":  {
+                                                         "tags":  [
+                                                                      "User"
+                                                                  ],
+                                                         "summary":  "Update Element",
+                                                         "operationId":  "update_element_user__element_id__put",
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "element_id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  "@{type=string; title=Element Id}"
+                                                                            },
+                                                                            {
+                                                                                "name":  "token",
+                                                                                "in":  "query",
+                                                                                "required":  false,
+                                                                                "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                            }
+                                                                        ],
+                                                         "requestBody":  {
+                                                                             "required":  true,
+                                                                             "content":  {
+                                                                                             "application/json":  "@{schema=}"
+                                                                                         }
+                                                                         },
+                                                         "responses":  {
+                                                                           "200":  {
+                                                                                       "description":  "Successful Response",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   },
+                                                                           "422":  {
+                                                                                       "description":  "Validation Error",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   }
+                                                                       }
+                                                     },
+                                             "get":  {
+                                                         "tags":  [
+                                                                      "User"
+                                                                  ],
+                                                         "summary":  "Read Element",
+                                                         "operationId":  "read_element_user__element_id__get",
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "element_id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  "@{type=string; title=Element Id}"
+                                                                            },
+                                                                            {
+                                                                                "name":  "token",
+                                                                                "in":  "query",
+                                                                                "required":  false,
+                                                                                "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                            }
+                                                                        ],
+                                                         "responses":  {
+                                                                           "200":  {
+                                                                                       "description":  "Successful Response",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   },
+                                                                           "422":  {
+                                                                                       "description":  "Validation Error",
+                                                                                       "content":  "@{application/json=}"
+                                                                                   }
+                                                                       }
+                                                     },
+                                             "delete":  {
+                                                            "tags":  [
+                                                                         "User"
+                                                                     ],
+                                                            "summary":  "Delete Element",
+                                                            "operationId":  "delete_element_user__element_id__delete",
+                                                            "parameters":  [
+                                                                               {
+                                                                                   "name":  "element_id",
+                                                                                   "in":  "path",
+                                                                                   "required":  true,
+                                                                                   "schema":  "@{type=string; title=Element Id}"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "token",
+                                                                                   "in":  "query",
+                                                                                   "required":  false,
+                                                                                   "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                               }
+                                                                           ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Successful Response",
+                                                                                          "content":  "@{application/json=}"
+                                                                                      },
+                                                                              "422":  {
+                                                                                          "description":  "Validation Error",
+                                                                                          "content":  "@{application/json=}"
+                                                                                      }
+                                                                          }
+                                                        }
+                                         },
+                  "/users/":  {
+                                  "get":  {
+                                              "tags":  [
+                                                           "User"
+                                                       ],
+                                              "summary":  "Get All Users",
+                                              "operationId":  "get_all_users_users__get",
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Successful Response",
+                                                                            "content":  "@{application/json=}"
+                                                                        }
+                                                            }
+                                          },
+                                  "post":  {
+                                               "tags":  [
+                                                            "User"
+                                                        ],
+                                               "summary":  "Create User",
+                                               "operationId":  "create_user_users__post",
+                                               "requestBody":  {
+                                                                   "content":  {
+                                                                                   "application/json":  "@{schema=}"
+                                                                               },
+                                                                   "required":  true
+                                                               },
+                                               "responses":  {
+                                                                 "200":  {
+                                                                             "description":  "Successful Response",
+                                                                             "content":  "@{application/json=}"
+                                                                         },
+                                                                 "422":  {
+                                                                             "description":  "Validation Error",
+                                                                             "content":  "@{application/json=}"
+                                                                         }
+                                                             }
+                                           }
+                              },
+                  "/wallet/":  {
+                                   "post":  {
+                                                "tags":  [
+                                                             "Wallet"
+                                                         ],
+                                                "summary":  "Create Element",
+                                                "operationId":  "create_element_wallet__post",
+                                                "parameters":  [
+                                                                   {
+                                                                       "name":  "token",
+                                                                       "in":  "query",
+                                                                       "required":  false,
+                                                                       "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                   }
+                                                               ],
+                                                "requestBody":  {
+                                                                    "required":  true,
+                                                                    "content":  {
+                                                                                    "application/json":  "@{schema=}"
+                                                                                }
+                                                                },
+                                                "responses":  {
+                                                                  "200":  {
+                                                                              "description":  "Successful Response",
+                                                                              "content":  "@{application/json=}"
+                                                                          },
+                                                                  "422":  {
+                                                                              "description":  "Validation Error",
+                                                                              "content":  "@{application/json=}"
+                                                                          }
+                                                              }
+                                            }
+                               },
+                  "/wallet/{element_id}":  {
+                                               "put":  {
+                                                           "tags":  [
+                                                                        "Wallet"
+                                                                    ],
+                                                           "summary":  "Update Element",
+                                                           "operationId":  "update_element_wallet__element_id__put",
+                                                           "parameters":  [
+                                                                              {
+                                                                                  "name":  "element_id",
+                                                                                  "in":  "path",
+                                                                                  "required":  true,
+                                                                                  "schema":  "@{type=string; title=Element Id}"
+                                                                              },
+                                                                              {
+                                                                                  "name":  "token",
+                                                                                  "in":  "query",
+                                                                                  "required":  false,
+                                                                                  "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                              }
+                                                                          ],
+                                                           "requestBody":  {
+                                                                               "required":  true,
+                                                                               "content":  {
+                                                                                               "application/json":  "@{schema=}"
+                                                                                           }
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Successful Response",
+                                                                                         "content":  "@{application/json=}"
+                                                                                     },
+                                                                             "422":  {
+                                                                                         "description":  "Validation Error",
+                                                                                         "content":  "@{application/json=}"
+                                                                                     }
+                                                                         }
+                                                       },
+                                               "get":  {
+                                                           "tags":  [
+                                                                        "Wallet"
+                                                                    ],
+                                                           "summary":  "Read Element",
+                                                           "operationId":  "read_element_wallet__element_id__get",
+                                                           "parameters":  [
+                                                                              {
+                                                                                  "name":  "element_id",
+                                                                                  "in":  "path",
+                                                                                  "required":  true,
+                                                                                  "schema":  "@{type=string; title=Element Id}"
+                                                                              },
+                                                                              {
+                                                                                  "name":  "token",
+                                                                                  "in":  "query",
+                                                                                  "required":  false,
+                                                                                  "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                              }
+                                                                          ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Successful Response",
+                                                                                         "content":  "@{application/json=}"
+                                                                                     },
+                                                                             "422":  {
+                                                                                         "description":  "Validation Error",
+                                                                                         "content":  "@{application/json=}"
+                                                                                     }
+                                                                         }
+                                                       },
+                                               "delete":  {
+                                                              "tags":  [
+                                                                           "Wallet"
+                                                                       ],
+                                                              "summary":  "Delete Element",
+                                                              "operationId":  "delete_element_wallet__element_id__delete",
+                                                              "parameters":  [
+                                                                                 {
+                                                                                     "name":  "element_id",
+                                                                                     "in":  "path",
+                                                                                     "required":  true,
+                                                                                     "schema":  "@{type=string; title=Element Id}"
+                                                                                 },
+                                                                                 {
+                                                                                     "name":  "token",
+                                                                                     "in":  "query",
+                                                                                     "required":  false,
+                                                                                     "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                                 }
+                                                                             ],
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "Successful Response",
+                                                                                            "content":  "@{application/json=}"
+                                                                                        },
+                                                                                "422":  {
+                                                                                            "description":  "Validation Error",
+                                                                                            "content":  "@{application/json=}"
+                                                                                        }
+                                                                            }
+                                                          }
+                                           },
+                  "/wallets/":  {
+                                    "post":  {
+                                                 "tags":  [
+                                                              "Wallet"
+                                                          ],
+                                                 "summary":  "Search Element",
+                                                 "operationId":  "search_element_wallets__post",
+                                                 "parameters":  [
+                                                                    {
+                                                                        "name":  "token",
+                                                                        "in":  "query",
+                                                                        "required":  false,
+                                                                        "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                    },
+                                                                    {
+                                                                        "name":  "skip",
+                                                                        "in":  "query",
+                                                                        "required":  false,
+                                                                        "schema":  "@{type=integer; default=0; title=Skip}"
+                                                                    },
+                                                                    {
+                                                                        "name":  "limit",
+                                                                        "in":  "query",
+                                                                        "required":  false,
+                                                                        "schema":  "@{type=integer; default=10; title=Limit}"
+                                                                    }
+                                                                ],
+                                                 "requestBody":  {
+                                                                     "content":  {
+                                                                                     "application/json":  "@{schema=}"
+                                                                                 }
+                                                                 },
+                                                 "responses":  {
+                                                                   "200":  {
+                                                                               "description":  "Successful Response",
+                                                                               "content":  "@{application/json=}"
+                                                                           },
+                                                                   "422":  {
+                                                                               "description":  "Validation Error",
+                                                                               "content":  "@{application/json=}"
+                                                                           }
+                                                               }
+                                             }
+                                },
+                  "/accessright/":  {
+                                        "post":  {
+                                                     "tags":  [
+                                                                  "AccessRight"
+                                                              ],
+                                                     "summary":  "Create Access Rights Route",
+                                                     "operationId":  "create_access_rights_route_accessright__post",
+                                                     "parameters":  [
+                                                                        {
+                                                                            "name":  "token",
+                                                                            "in":  "query",
+                                                                            "required":  false,
+                                                                            "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                        }
+                                                                    ],
+                                                     "requestBody":  {
+                                                                         "required":  true,
+                                                                         "content":  {
+                                                                                         "application/json":  "@{schema=}"
+                                                                                     }
+                                                                     },
+                                                     "responses":  {
+                                                                       "200":  {
+                                                                                   "description":  "Successful Response",
+                                                                                   "content":  "@{application/json=}"
+                                                                               },
+                                                                       "422":  {
+                                                                                   "description":  "Validation Error",
+                                                                                   "content":  "@{application/json=}"
+                                                                               }
+                                                                   }
+                                                 }
+                                    },
+                  "/accessright/{element_id}":  {
+                                                    "put":  {
+                                                                "tags":  [
+                                                                             "AccessRight"
+                                                                         ],
+                                                                "summary":  "Update Access Rights",
+                                                                "operationId":  "update_access_rights_accessright__element_id__put",
+                                                                "parameters":  [
+                                                                                   {
+                                                                                       "name":  "element_id",
+                                                                                       "in":  "path",
+                                                                                       "required":  true,
+                                                                                       "schema":  "@{type=string; title=Element Id}"
+                                                                                   },
+                                                                                   {
+                                                                                       "name":  "token",
+                                                                                       "in":  "query",
+                                                                                       "required":  false,
+                                                                                       "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                                   }
+                                                                               ],
+                                                                "requestBody":  {
+                                                                                    "required":  true,
+                                                                                    "content":  {
+                                                                                                    "application/json":  "@{schema=}"
+                                                                                                }
+                                                                                },
+                                                                "responses":  {
+                                                                                  "200":  {
+                                                                                              "description":  "Successful Response",
+                                                                                              "content":  "@{application/json=}"
+                                                                                          },
+                                                                                  "422":  {
+                                                                                              "description":  "Validation Error",
+                                                                                              "content":  "@{application/json=}"
+                                                                                          }
+                                                                              }
+                                                            },
+                                                    "get":  {
+                                                                "tags":  [
+                                                                             "AccessRight"
+                                                                         ],
+                                                                "summary":  "Read Access Rights",
+                                                                "operationId":  "read_access_rights_accessright__element_id__get",
+                                                                "parameters":  [
+                                                                                   {
+                                                                                       "name":  "element_id",
+                                                                                       "in":  "path",
+                                                                                       "required":  true,
+                                                                                       "schema":  "@{type=string; title=Element Id}"
+                                                                                   },
+                                                                                   {
+                                                                                       "name":  "token",
+                                                                                       "in":  "query",
+                                                                                       "required":  false,
+                                                                                       "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                                   }
+                                                                               ],
+                                                                "responses":  {
+                                                                                  "200":  {
+                                                                                              "description":  "Successful Response",
+                                                                                              "content":  "@{application/json=}"
+                                                                                          },
+                                                                                  "422":  {
+                                                                                              "description":  "Validation Error",
+                                                                                              "content":  "@{application/json=}"
+                                                                                          }
+                                                                              }
+                                                            },
+                                                    "delete":  {
+                                                                   "tags":  [
+                                                                                "AccessRight"
+                                                                            ],
+                                                                   "summary":  "Delete Access Rights",
+                                                                   "operationId":  "delete_access_rights_accessright__element_id__delete",
+                                                                   "parameters":  [
+                                                                                      {
+                                                                                          "name":  "element_id",
+                                                                                          "in":  "path",
+                                                                                          "required":  true,
+                                                                                          "schema":  "@{type=string; title=Element Id}"
+                                                                                      },
+                                                                                      {
+                                                                                          "name":  "token",
+                                                                                          "in":  "query",
+                                                                                          "required":  false,
+                                                                                          "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                                      }
+                                                                                  ],
+                                                                   "responses":  {
+                                                                                     "200":  {
+                                                                                                 "description":  "Successful Response",
+                                                                                                 "content":  "@{application/json=}"
+                                                                                             },
+                                                                                     "422":  {
+                                                                                                 "description":  "Validation Error",
+                                                                                                 "content":  "@{application/json=}"
+                                                                                             }
+                                                                                 }
+                                                               }
+                                                },
+                  "/accessrights/":  {
+                                         "post":  {
+                                                      "tags":  [
+                                                                   "AccessRight"
+                                                               ],
+                                                      "summary":  "Search Access Rights",
+                                                      "operationId":  "search_access_rights_accessrights__post",
+                                                      "parameters":  [
+                                                                         {
+                                                                             "name":  "token",
+                                                                             "in":  "query",
+                                                                             "required":  false,
+                                                                             "schema":  "@{anyOf=System.Object[]; title=Token}"
+                                                                         },
+                                                                         {
+                                                                             "name":  "skip",
+                                                                             "in":  "query",
+                                                                             "required":  false,
+                                                                             "schema":  "@{type=integer; default=0; title=Skip}"
+                                                                         },
+                                                                         {
+                                                                             "name":  "limit",
+                                                                             "in":  "query",
+                                                                             "required":  false,
+                                                                             "schema":  "@{type=integer; default=10; title=Limit}"
+                                                                         }
+                                                                     ],
+                                                      "requestBody":  {
+                                                                          "content":  {
+                                                                                          "application/json":  "@{schema=}"
+                                                                                      }
+                                                                      },
+                                                      "responses":  {
+                                                                        "200":  {
+                                                                                    "description":  "Successful Response",
+                                                                                    "content":  "@{application/json=}"
+                                                                                },
+                                                                        "422":  {
+                                                                                    "description":  "Validation Error",
+                                                                                    "content":  "@{application/json=}"
+                                                                                }
+                                                                    }
+                                                  }
+                                     }
+              },
+    "components":  {
+                       "schemas":  {
+                                       "AccessRight":  {
+                                                           "properties":  {
+                                                                              "id":  {
+                                                                                         "type":  "string",
+                                                                                         "title":  "Id",
+                                                                                         "default":  ""
+                                                                                     },
+                                                                              "name":  {
+                                                                                           "type":  "string",
+                                                                                           "title":  "Name",
+                                                                                           "default":  ""
+                                                                                       },
+                                                                              "owner":  {
+                                                                                            "anyOf":  " ",
+                                                                                            "title":  "Owner",
+                                                                                            "default":  false,
+                                                                                            "x_frontend_fieldName":  "Only applies to own records"
+                                                                                        },
+                                                                              "role":  {
+                                                                                           "anyOf":  " ",
+                                                                                           "title":  "Role",
+                                                                                           "default":  "",
+                                                                                           "x_frontend_fieldName":  "Role",
+                                                                                           "x_frontend_relation":  "Role"
+                                                                                       },
+                                                                              "model":  {
+                                                                                            "anyOf":  " ",
+                                                                                            "title":  "Model",
+                                                                                            "default":  "",
+                                                                                            "x_frontend_fieldName":  "Model",
+                                                                                            "x_frontend_widget":  "ModelsSelectableWidget"
+                                                                                        },
+                                                                              "operations":  {
+                                                                                                 "additionalProperties":  true,
+                                                                                                 "type":  "object",
+                                                                                                 "title":  "Operations",
+                                                                                                 "default":  "",
+                                                                                                 "x_frontend_fieldName":  "Operations Permitted",
+                                                                                                 "x_frontend_placeholder":  "{\u0027create\u0027: 1, \u0027read\u0027: 1, \u0027update\u0027: 0, \u0027delete\u0027: 0, \u0027search\u0027: 1}"
+                                                                                             },
+                                                                              "fields_create":  {
+                                                                                                    "additionalProperties":  true,
+                                                                                                    "type":  "object",
+                                                                                                    "title":  "Fields Create",
+                                                                                                    "default":  "",
+                                                                                                    "x_frontend_fieldName":  "Fields Creation",
+                                                                                                    "x_frontend_placeholder":  "{\u0027field_1\u0027: 1, \u0027field_2\u0027: 1, \u0027field_3\u0027: 0, ...}"
+                                                                                                },
+                                                                              "fields_edit":  {
+                                                                                                  "additionalProperties":  true,
+                                                                                                  "type":  "object",
+                                                                                                  "title":  "Fields Edit",
+                                                                                                  "default":  "",
+                                                                                                  "x_frontend_fieldName":  "Fields Edition",
+                                                                                                  "x_frontend_placeholder":  "{\u0027field_1\u0027: 1, \u0027field_2\u0027: 1, \u0027field_3\u0027: 0, ...}"
+                                                                                              },
+                                                                              "fields_visible":  {
+                                                                                                     "additionalProperties":  true,
+                                                                                                     "type":  "object",
+                                                                                                     "title":  "Fields Visible",
+                                                                                                     "default":  "",
+                                                                                                     "x_frontend_fieldName":  "Fields Visibility",
+                                                                                                     "x_frontend_placeholder":  "{\u0027field_1\u0027: 1, \u0027field_2\u0027: 1, \u0027field_3\u0027: 0, ...}"
+                                                                                                 }
+                                                                          },
+                                                           "type":  "object",
+                                                           "title":  "AccessRight"
+                                                       },
+                                       "Body_search_access_rights_accessrights__post":  {
+                                                                                            "properties":  {
+                                                                                                               "filters":  {
+                                                                                                                               "additionalProperties":  true,
+                                                                                                                               "type":  "object",
+                                                                                                                               "title":  "Filters",
+                                                                                                                               "default":  ""
+                                                                                                                           },
+                                                                                                               "orders":  {
+                                                                                                                              "additionalProperties":  true,
+                                                                                                                              "type":  "object",
+                                                                                                                              "title":  "Orders",
+                                                                                                                              "default":  ""
+                                                                                                                          }
+                                                                                                           },
+                                                                                            "type":  "object",
+                                                                                            "title":  "Body_search_access_rights_accessrights__post"
+                                                                                        },
+                                       "Body_search_element_roles__post":  {
+                                                                               "properties":  {
+                                                                                                  "filters":  {
+                                                                                                                  "additionalProperties":  true,
+                                                                                                                  "type":  "object",
+                                                                                                                  "title":  "Filters",
+                                                                                                                  "default":  ""
+                                                                                                              },
+                                                                                                  "orders":  {
+                                                                                                                 "additionalProperties":  true,
+                                                                                                                 "type":  "object",
+                                                                                                                 "title":  "Orders",
+                                                                                                                 "default":  ""
+                                                                                                             }
+                                                                                              },
+                                                                               "type":  "object",
+                                                                               "title":  "Body_search_element_roles__post"
+                                                                           },
+                                       "Body_search_element_users__post":  {
+                                                                               "properties":  {
+                                                                                                  "filters":  {
+                                                                                                                  "additionalProperties":  true,
+                                                                                                                  "type":  "object",
+                                                                                                                  "title":  "Filters",
+                                                                                                                  "default":  ""
+                                                                                                              },
+                                                                                                  "orders":  {
+                                                                                                                 "additionalProperties":  true,
+                                                                                                                 "type":  "object",
+                                                                                                                 "title":  "Orders",
+                                                                                                                 "default":  ""
+                                                                                                             }
+                                                                                              },
+                                                                               "type":  "object",
+                                                                               "title":  "Body_search_element_users__post"
+                                                                           },
+                                       "Body_search_element_wallets__post":  {
+                                                                                 "properties":  {
+                                                                                                    "filters":  {
+                                                                                                                    "additionalProperties":  true,
+                                                                                                                    "type":  "object",
+                                                                                                                    "title":  "Filters",
+                                                                                                                    "default":  ""
+                                                                                                                },
+                                                                                                    "orders":  {
+                                                                                                                   "additionalProperties":  true,
+                                                                                                                   "type":  "object",
+                                                                                                                   "title":  "Orders",
+                                                                                                                   "default":  ""
+                                                                                                               }
+                                                                                                },
+                                                                                 "type":  "object",
+                                                                                 "title":  "Body_search_element_wallets__post"
+                                                                             },
+                                       "HTTPValidationError":  {
+                                                                   "properties":  {
+                                                                                      "detail":  {
+                                                                                                     "items":  "@{$ref=#/components/schemas/ValidationError}",
+                                                                                                     "type":  "array",
+                                                                                                     "title":  "Detail"
+                                                                                                 }
+                                                                                  },
+                                                                   "type":  "object",
+                                                                   "title":  "HTTPValidationError"
+                                                               },
+                                       "Role":  {
+                                                    "properties":  {
+                                                                       "id":  {
+                                                                                  "type":  "string",
+                                                                                  "title":  "Id",
+                                                                                  "default":  ""
+                                                                              },
+                                                                       "name":  {
+                                                                                    "type":  "string",
+                                                                                    "title":  "Name"
+                                                                                },
+                                                                       "owner":  {
+                                                                                     "type":  "string",
+                                                                                     "title":  "Owner",
+                                                                                     "default":  ""
+                                                                                 }
+                                                                   },
+                                                    "type":  "object",
+                                                    "required":  [
+                                                                     "name"
+                                                                 ],
+                                                    "title":  "Role"
+                                                },
+                                       "User":  {
+                                                    "properties":  {
+                                                                       "id":  {
+                                                                                  "type":  "string",
+                                                                                  "title":  "Id",
+                                                                                  "default":  ""
+                                                                              },
+                                                                       "name":  {
+                                                                                    "type":  "string",
+                                                                                    "title":  "Name",
+                                                                                    "description":  "User first name"
+                                                                                },
+                                                                       "owner":  {
+                                                                                     "type":  "string",
+                                                                                     "title":  "Owner",
+                                                                                     "default":  ""
+                                                                                 },
+                                                                       "surnames":  {
+                                                                                        "anyOf":  " ",
+                                                                                        "title":  "Surnames",
+                                                                                        "description":  "User last name"
+                                                                                    },
+                                                                       "email":  {
+                                                                                     "type":  "string",
+                                                                                     "title":  "Email",
+                                                                                     "description":  "User email address"
+                                                                                 },
+                                                                       "password":  {
+                                                                                        "type":  "string",
+                                                                                        "format":  "password",
+                                                                                        "title":  "Password",
+                                                                                        "description":  "User password",
+                                                                                        "writeOnly":  true
+                                                                                    },
+                                                                       "phone":  {
+                                                                                     "anyOf":  " ",
+                                                                                     "title":  "Phone",
+                                                                                     "description":  "User phone number"
+                                                                                 }
+                                                                   },
+                                                    "type":  "object",
+                                                    "required":  [
+                                                                     "name",
+                                                                     "email",
+                                                                     "password"
+                                                                 ],
+                                                    "title":  "User"
+                                                },
+                                       "UserResponse":  {
+                                                            "properties":  {
+                                                                               "_id":  {
+                                                                                           "anyOf":  " ",
+                                                                                           "title":  "Id",
+                                                                                           "description":  "User ID"
+                                                                                       },
+                                                                               "owner":  {
+                                                                                             "anyOf":  " ",
+                                                                                             "title":  "Owner",
+                                                                                             "description":  "User owner"
+                                                                                         },
+                                                                               "name":  {
+                                                                                            "type":  "string",
+                                                                                            "title":  "Name",
+                                                                                            "description":  "User first name"
+                                                                                        },
+                                                                               "surnames":  {
+                                                                                                "anyOf":  " ",
+                                                                                                "title":  "Surnames",
+                                                                                                "description":  "User last name"
+                                                                                            },
+                                                                               "email":  {
+                                                                                             "type":  "string",
+                                                                                             "title":  "Email",
+                                                                                             "description":  "User email address"
+                                                                                         },
+                                                                               "password":  {
+                                                                                                "anyOf":  " ",
+                                                                                                "title":  "Password",
+                                                                                                "description":  "User password"
+                                                                                            },
+                                                                               "phone":  {
+                                                                                             "anyOf":  " ",
+                                                                                             "title":  "Phone",
+                                                                                             "description":  "User phone number"
+                                                                                         }
+                                                                           },
+                                                            "type":  "object",
+                                                            "required":  [
+                                                                             "name",
+                                                                             "email"
+                                                                         ],
+                                                            "title":  "UserResponse"
+                                                        },
+                                       "ValidationError":  {
+                                                               "properties":  {
+                                                                                  "loc":  {
+                                                                                              "items":  "@{anyOf=System.Object[]}",
+                                                                                              "type":  "array",
+                                                                                              "title":  "Location"
+                                                                                          },
+                                                                                  "msg":  {
+                                                                                              "type":  "string",
+                                                                                              "title":  "Message"
+                                                                                          },
+                                                                                  "type":  {
+                                                                                               "type":  "string",
+                                                                                               "title":  "Error Type"
+                                                                                           },
+                                                                                  "input":  {
+                                                                                                "title":  "Input"
+                                                                                            },
+                                                                                  "ctx":  {
+                                                                                              "type":  "object",
+                                                                                              "title":  "Context"
+                                                                                          }
+                                                                              },
+                                                               "type":  "object",
+                                                               "required":  [
+                                                                                "loc",
+                                                                                "msg",
+                                                                                "type"
+                                                                            ],
+                                                               "title":  "ValidationError"
+                                                           },
+                                       "Wallet":  {
+                                                      "properties":  {
+                                                                         "id":  {
+                                                                                    "type":  "string",
+                                                                                    "title":  "Id",
+                                                                                    "default":  ""
+                                                                                },
+                                                                         "name":  {
+                                                                                      "type":  "string",
+                                                                                      "title":  "Name"
+                                                                                  },
+                                                                         "owner":  {
+                                                                                       "type":  "string",
+                                                                                       "title":  "Owner",
+                                                                                       "default":  ""
+                                                                                   },
+                                                                         "address":  {
+                                                                                         "type":  "string",
+                                                                                         "title":  "Address",
+                                                                                         "description":  "The wallet address",
+                                                                                         "x_required":  true,
+                                                                                         "x_unique":  true
+                                                                                     },
+                                                                         "balance":  {
+                                                                                         "anyOf":  " ",
+                                                                                         "title":  "Balance",
+                                                                                         "description":  "The wallet balance",
+                                                                                         "default":  0.0
+                                                                                     },
+                                                                         "user_id":  {
+                                                                                         "type":  "string",
+                                                                                         "title":  "User Id",
+                                                                                         "description":  "The user ID",
+                                                                                         "x_required":  true,
+                                                                                         "x_type":  "objectId"
+                                                                                     }
+                                                                     },
+                                                      "type":  "object",
+                                                      "required":  [
+                                                                       "name",
+                                                                       "address",
+                                                                       "user_id"
+                                                                   ],
+                                                      "title":  "Wallet"
+                                                  }
+                                   }
+                   }
+}
