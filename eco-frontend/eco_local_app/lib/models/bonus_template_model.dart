@@ -1,9 +1,13 @@
+import 'campaign_model.dart';
+
 class BonusTemplateModel {
   final String id;
   final String title;
   final double costPrice;
   final double spendingValue;
   final String expirationDate;
+  final String? campaignId;
+  final CampaignModel? campaign;
 
   BonusTemplateModel({
     required this.id,
@@ -11,6 +15,8 @@ class BonusTemplateModel {
     required this.costPrice,
     required this.spendingValue,
     required this.expirationDate,
+    this.campaignId,
+    this.campaign,
   });
 
   factory BonusTemplateModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +26,10 @@ class BonusTemplateModel {
       costPrice: (json['cost_price'] as num?)?.toDouble() ?? 0.0,
       spendingValue: (json['spending_value'] as num?)?.toDouble() ?? 0.0,
       expirationDate: json['expiration_date'] as String? ?? '',
+      campaignId: json['campaign_id'] as String?,
+      campaign: json['campaign'] != null
+          ? CampaignModel.fromJson(json['campaign'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -54,5 +64,7 @@ class BonusTemplateModel {
         'cost_price': costPrice,
         'spending_value': spendingValue,
         'expiration_date': expirationDate,
+        'campaign_id': campaignId,
+        'campaign': campaign?.toJson(),
       };
 }

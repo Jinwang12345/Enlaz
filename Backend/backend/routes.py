@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Header, WebSocket
 from laiagenlib.Domain.LaiaBaseModel.ModelRepository import ModelRepository
 from laiagenlib.Application.LaiaBaseModel import ReadLaiaBaseModel, CreateLaiaBaseModel, DeleteLaiaBaseModel, SearchLaiaBaseModel, UpdateLaiaBaseModel
 from laiagenlib.Application.LaiaUser import JWTToken
-from .models import User, Wallet, Transaction, Shop
+from .models import User, Wallet, Transaction, Shop, Campaign
 from pydantic import BaseModel, Field, SecretStr
 from typing import Optional, List
 import datetime
@@ -635,9 +635,41 @@ def ChatRoutes(db):
 def BonusRoutes(repository: ModelRepository):
     router = APIRouter(prefix="/api/bonuses", tags=["Bonuses"])
 
+    @router.get("/campaigns", response_model=List[dict])
+    async def get_campaigns():
+        try:
+            cursor = repository.db["campaign"].find()
+            campaigns = list(cursor)
+            for doc in campaigns:
+                doc["id"] = str(doc.pop("_id"))
+            return campaigns
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
     @router.get("/templates", response_model=List[dict])
     async def get_templates():
         try:
+            # Check if there is an active campaign and seed if empty
+            campaign_cursor = repository.db["campaign"].find({"status": "active"})
+            campaigns = list(campaign_cursor)
+            if not campaigns:
+                # Seed a default campaign
+                default_campaign = {
+                    "name": "Campaña Impulso Gràcia 2026",
+                    "description": "Ayudas para la compra en tiendas locales del distrito de Gràcia. Subvencionado al 50%.",
+                    "total_budget": 1000.0,
+                    "remaining_budget": 1000.0,
+                    "max_bonuses_per_user": 3,
+                    "start_date": "2026-01-01T00:00:00Z",
+                    "end_date": "2026-12-31T23:59:59Z",
+                    "status": "active",
+                    "owner": "admin"
+                }
+                insert_result = repository.db["campaign"].insert_one(default_campaign)
+                campaign_id = str(insert_result.inserted_id)
+            else:
+                campaign_id = str(campaigns[0].get("_id") or campaigns[0].get("id"))
+
             # Fetch available templates from DB
             cursor = repository.db["bonustemplate"].find()
             templates = list(cursor)
@@ -649,21 +681,24 @@ def BonusRoutes(repository: ModelRepository):
                         "cost_price": 10.0,
                         "spending_value": 20.0,
                         "expiration_date": "2026-10-12T23:59:59Z",
-                        "owner": "admin"
+                        "owner": "admin",
+                        "campaign_id": campaign_id
                     },
                     {
                         "title": "Bono Forn de Gràcia",
                         "cost_price": 15.0,
                         "spending_value": 25.0,
                         "expiration_date": "2026-09-30T23:59:59Z",
-                        "owner": "admin"
+                        "owner": "admin",
+                        "campaign_id": campaign_id
                     },
                     {
                         "title": "Bono Huerto Urbano",
                         "cost_price": 5.0,
                         "spending_value": 12.0,
                         "expiration_date": "2026-12-31T23:59:59Z",
-                        "owner": "admin"
+                        "owner": "admin",
+                        "campaign_id": campaign_id
                     }
                 ]
                 for item in seed_data:
@@ -671,8 +706,29 @@ def BonusRoutes(repository: ModelRepository):
                 cursor = repository.db["bonustemplate"].find()
                 templates = list(cursor)
 
+            # Ensure all templates have a campaign_id and embed campaign details
             for doc in templates:
                 doc["id"] = str(doc.pop("_id"))
+                c_id = doc.get("campaign_id")
+                if not c_id:
+                    repository.db["bonustemplate"].update_one(
+                        {"_id": ObjectId(doc["id"])},
+                        {"$set": {"campaign_id": campaign_id}}
+                    )
+                    c_id = campaign_id
+                    doc["campaign_id"] = campaign_id
+                
+                # Fetch campaign
+                try:
+                    campaign_doc = repository.db["campaign"].find_one({"_id": ObjectId(c_id)})
+                except Exception:
+                    campaign_doc = repository.db["campaign"].find_one({"_id": c_id})
+                if campaign_doc:
+                    campaign_doc["id"] = str(campaign_doc.pop("_id"))
+                    doc["campaign"] = campaign_doc
+                else:
+                    doc["campaign"] = None
+
             return templates
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
@@ -693,11 +749,70 @@ def BonusRoutes(repository: ModelRepository):
             raise HTTPException(status_code=404, detail="Bono no encontrado")
 
         cost_price = float(template["cost_price"])
+        spending_value = float(template["spending_value"])
+        subsidy = spending_value - cost_price
+
+        # Retrieve campaign
+        campaign_id = template.get("campaign_id")
+        if not campaign_id:
+            # Try to get first active campaign
+            act_campaign = repository.db["campaign"].find_one({"status": "active"})
+            if act_campaign:
+                campaign_id = str(act_campaign.get("_id") or act_campaign.get("id"))
+                repository.db["bonustemplate"].update_one({"_id": template.get("_id")}, {"$set": {"campaign_id": campaign_id}})
+            else:
+                raise HTTPException(status_code=400, detail="No hay ninguna campaña activa asociada a este bono")
+
+        try:
+            campaign = repository.db["campaign"].find_one({"_id": ObjectId(campaign_id)})
+        except Exception:
+            campaign = repository.db["campaign"].find_one({"_id": campaign_id})
+
+        if not campaign:
+            raise HTTPException(status_code=400, detail="Campaña no encontrada")
+
+        if campaign.get("status") != "active":
+            raise HTTPException(status_code=400, detail="La campaña no está activa")
+
+        # Check budget
+        remaining_budget = float(campaign.get("remaining_budget", 0.0))
+        if remaining_budget < subsidy:
+            raise HTTPException(status_code=400, detail="El presupuesto subvencionado de la campaña se ha agotado")
+
+        # Check date range
+        now = datetime.datetime.utcnow()
+        
+        def parse_date(d):
+            if isinstance(d, datetime.datetime):
+                return d
+            if isinstance(d, str):
+                d_str = d.replace("Z", "")
+                if "T" in d_str:
+                    return datetime.datetime.fromisoformat(d_str)
+                return datetime.datetime.strptime(d_str, "%Y-%m-%d")
+            return None
+
+        start_date = parse_date(campaign.get("start_date"))
+        end_date = parse_date(campaign.get("end_date"))
+
+        if start_date and now < start_date:
+            raise HTTPException(status_code=400, detail="La campaña de este bono aún no ha comenzado")
+        if end_date and now > end_date:
+            raise HTTPException(status_code=400, detail="La campaña de este bono ha expirado")
+
+        # Check user quota limit
+        max_per_user = int(campaign.get("max_bonuses_per_user", 999))
+        user_bonus_count = repository.db["userbonus"].count_documents({
+            "user_id": user_id,
+            "campaign_id": campaign_id
+        })
+        if user_bonus_count >= max_per_user:
+            raise HTTPException(status_code=400, detail=f"Has alcanzado el límite máximo de {max_per_user} bonos permitidos en esta campaña")
 
         # Fetch user's wallet
         wallet = repository.db["wallet"].find_one({"user_id": user_id})
         if not wallet:
-            # Create a wallet if it doesn't exist (with 0 balance)
+            # Create a wallet if it doesn't exist
             wallet_data = {
                 "address": f"W-{user_id[:8]}",
                 "balance": 0.0,
@@ -719,12 +834,20 @@ def BonusRoutes(repository: ModelRepository):
             {"$set": {"balance": new_balance}}
         )
 
+        # Deduct budget from Campaign
+        new_remaining_budget = remaining_budget - subsidy
+        repository.db["campaign"].update_one(
+            {"_id": campaign["_id"]},
+            {"$set": {"remaining_budget": new_remaining_budget}}
+        )
+
         # Create user bonus entry
         qr_token = str(uuid.uuid4())
         purchased_at = datetime.datetime.utcnow().isoformat() + "Z"
         user_bonus_data = {
             "user_id": user_id,
             "bonus_template_id": str(template.get("_id") or template.get("id")),
+            "campaign_id": campaign_id,
             "status": "active",
             "qr_token": qr_token,
             "purchased_at": purchased_at,
@@ -753,7 +876,6 @@ def BonusRoutes(repository: ModelRepository):
     @router.get("/my-bonuses/{target_user_id}", response_model=List[dict])
     async def get_my_bonuses(target_user_id: str, user_id: str = Depends(get_current_user_id)):
         from bson import ObjectId
-        # Enforce that the user is fetching their own bonuses (or admin)
         if user_id != target_user_id:
             raise HTTPException(status_code=403, detail="No tienes permiso para ver estos bonos")
 
@@ -765,7 +887,6 @@ def BonusRoutes(repository: ModelRepository):
             ub_id = str(ub.pop("_id"))
             template_id = ub.get("bonus_template_id")
             
-            # Fetch template details to embed in the response
             try:
                 template_oid = ObjectId(template_id)
                 template = repository.db["bonustemplate"].find_one({"_id": template_oid})

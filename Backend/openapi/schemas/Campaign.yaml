@@ -1,0 +1,45 @@
+Campaign:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Campaign name
+      x_required: true
+    description:
+      type: string
+      description: Campaign description
+    total_budget:
+      type: number
+      format: float
+      description: Total budget for the campaign
+      x_required: true
+    remaining_budget:
+      type: number
+      format: float
+      description: Remaining budget for the campaign
+      x_required: true
+    max_bonuses_per_user:
+      type: integer
+      description: Maximum number of bonuses a user can buy in this campaign
+      x_required: true
+    start_date:
+      type: string
+      format: date-time
+      description: Campaign start date
+      x_required: true
+    end_date:
+      type: string
+      format: date-time
+      description: Campaign end date
+      x_required: true
+    status:
+      type: string
+      default: active
+      description: Campaign status (active, completed, draft)
+  required:
+    - name
+    - total_budget
+    - remaining_budget
+    - max_bonuses_per_user
+    - start_date
+    - end_date

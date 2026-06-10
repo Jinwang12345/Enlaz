@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/bonus_template_model.dart';
 import '../../models/user_bonus_model.dart';
+import '../../models/campaign_model.dart';
+
 import '../../services/bonus_service.dart';
 import '../../providers/user_provider.dart';
 import '../../providers/wallet_provider.dart';
@@ -261,8 +263,9 @@ class _BonusMarketScreenState extends ConsumerState<BonusMarketScreen> {
 
   // ─── Available Templates Tab ─────────────────────────────────────────────────
   Widget _buildAvailableTab() {
-    return FutureBuilder<List<BonusTemplateModel>>(
-      future: _templatesFuture,
+    final myFuture = _myBonusesFuture ?? Future.value(<UserBonusModel>[]);
+    return FutureBuilder<List<dynamic>>(
+      future: Future.wait([_templatesFuture, myFuture]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -273,7 +276,11 @@ class _BonusMarketScreenState extends ConsumerState<BonusMarketScreen> {
                 style: const TextStyle(color: Colors.red)),
           );
         }
-        final templates = snapshot.data ?? [];
+        
+        final List<dynamic> results = snapshot.data ?? [[], []];
+        final List<BonusTemplateModel> templates = List<BonusTemplateModel>.from(results[0]);
+        final List<UserBonusModel> myBonuses = List<UserBonusModel>.from(results[1]);
+
         if (templates.isEmpty) {
           return const Center(
             child: Text('No hay bonos disponibles en este momento.',
@@ -281,84 +288,278 @@ class _BonusMarketScreenState extends ConsumerState<BonusMarketScreen> {
           );
         }
 
-        return ListView.separated(
+        // Group templates by campaign
+        final campaignMap = <String, CampaignModel>{};
+        final templatesByCampaign = <String, List<BonusTemplateModel>>{};
+        final noCampaignTemplates = <BonusTemplateModel>[];
+
+        for (final t in templates) {
+          if (t.campaign != null) {
+            campaignMap[t.campaign!.id] = t.campaign!;
+            templatesByCampaign.putIfAbsent(t.campaign!.id, () => []).add(t);
+          } else {
+            noCampaignTemplates.add(t);
+          }
+        }
+
+        return ListView(
           physics: const BouncingScrollPhysics(),
-          itemCount: templates.length,
-          separatorBuilder: (_, a) => const SizedBox(height: 14),
-          itemBuilder: (context, index) {
-            final bonus = templates[index];
-            return Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: _surface,
-                borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: _border),
-                boxShadow: const [
-                  BoxShadow(color: Color(0x0F000000), blurRadius: 12, offset: Offset(0, 4)),
-                ],
-              ),
-              child: Column(
+          children: [
+            ...campaignMap.values.map((campaign) {
+              final campaignTemplates = templatesByCampaign[campaign.id] ?? [];
+              final userQuotaUsed = myBonuses.where((ub) => ub.campaignId == campaign.id || ub.template?.campaignId == campaign.id).length;
+              final isQuotaExceeded = userQuotaUsed >= campaign.maxBonusesPerUser;
+              final isBudgetExhausted = campaign.remainingBudget <= 0;
+
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: _greenLight,
-                          borderRadius: BorderRadius.circular(999),
+                  // Campaign Card Header
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF14532D), Color(0xFF166534)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(22),
+                      boxShadow: const [
+                        BoxShadow(color: Color(0x1F000000), blurRadius: 10, offset: Offset(0, 4)),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.campaign_rounded, color: Colors.amber, size: 28),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                campaign.name,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                campaign.status.toUpperCase(),
+                                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.amber),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          bonus.savingsLabel,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF166534),
+                        if (campaign.description != null) ...[
+                          const SizedBox(height: 8),
+                          Text(
+                            campaign.description!,
+                            style: const TextStyle(fontSize: 12, color: Colors.white70),
+                          ),
+                        ],
+                        const SizedBox(height: 12),
+                        // Budget Progress bar
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Presupuesto: ${campaign.remainingBudget.toStringAsFixed(0)}€ restantes de ${campaign.totalBudget.toStringAsFixed(0)}€',
+                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+                            ),
+                            Text(
+                              '${((campaign.remainingBudget / campaign.totalBudget) * 100).toStringAsFixed(0)}%',
+                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.amber),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: LinearProgressIndicator(
+                            value: (campaign.remainingBudget / campaign.totalBudget).clamp(0.0, 1.0),
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              isBudgetExhausted ? Colors.red : (campaign.remainingBudget / campaign.totalBudget < 0.2 ? Colors.orange : Colors.greenAccent)
+                            ),
+                            minHeight: 8,
                           ),
                         ),
+                        const SizedBox(height: 12),
+                        // User Limit status
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                isQuotaExceeded ? Icons.lock_outline : Icons.assignment_ind_outlined,
+                                size: 16,
+                                color: isQuotaExceeded ? Colors.redAccent : Colors.greenAccent,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Tu consumo en esta campaña: $userQuotaUsed / ${campaign.maxBonusesPerUser} bonos',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: isQuotaExceeded ? Colors.red.shade200 : Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // List of Campaign templates
+                  ...campaignTemplates.map((bonus) {
+                    final savings = bonus.spendingValue - bonus.costPrice;
+                    final isBuyDisabled = isQuotaExceeded || isBudgetExhausted || savings > campaign.remainingBudget;
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: _surface,
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(color: _border),
+                        boxShadow: const [
+                          BoxShadow(color: Color(0x0F000000), blurRadius: 12, offset: Offset(0, 4)),
+                        ],
                       ),
-                      const Spacer(),
-                      const Icon(Icons.attach_money_rounded, color: Color(0xFFEC5B13), size: 18),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: _greenLight,
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: Text(
+                                  bonus.savingsLabel,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xFF166534),
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              const Icon(Icons.attach_money_rounded, color: Color(0xFFEC5B13), size: 18),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            bonus.title,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF111827),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            bonus.description,
+                            style: const TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            isBudgetExhausted 
+                                ? 'Presupuesto agotado para esta campaña.'
+                                : isQuotaExceeded
+                                    ? 'Has alcanzado el límite máximo permitido para esta campaña.'
+                                    : 'Saldo extra subvencionado por el ayuntamiento.',
+                            style: TextStyle(
+                              fontSize: 12, 
+                              color: isQuotaExceeded || isBudgetExhausted ? Colors.red.shade700 : Colors.green.shade700,
+                              fontWeight: isQuotaExceeded || isBudgetExhausted ? FontWeight.bold : FontWeight.normal,
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: isBuyDisabled ? null : () => _handleBuy(bonus),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: isBuyDisabled ? Colors.grey.shade300 : _brandOrange,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                elevation: 0,
+                              ),
+                              child: Text(
+                                isBudgetExhausted 
+                                    ? 'Presupuesto Agotado' 
+                                    : isQuotaExceeded 
+                                        ? 'Límite Superado' 
+                                        : 'Adquirir', 
+                                style: const TextStyle(fontWeight: FontWeight.w800)
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                  const SizedBox(height: 16),
+                ],
+              );
+            }),
+            // Templates without campaign (legacy fallback)
+            if (noCampaignTemplates.isNotEmpty) ...[
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  'Otros Bonos',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF374151)),
+                ),
+              ),
+              ...noCampaignTemplates.map((bonus) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 14),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: _surface,
+                    borderRadius: BorderRadius.circular(22),
+                    border: Border.all(color: _border),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(bonus.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 6),
+                      Text(bonus.description),
+                      const SizedBox(height: 14),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => _handleBuy(bonus),
+                          style: ElevatedButton.styleFrom(backgroundColor: _brandOrange),
+                          child: const Text('Adquirir'),
+                        ),
+                      )
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    bonus.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF111827),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    bonus.description,
-                    style: const TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Saldo extra disponible al canjear en comercio local.',
-                    style: TextStyle(fontSize: 12, color: Colors.green.shade700),
-                  ),
-                  const SizedBox(height: 14),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () => _handleBuy(bonus),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _brandOrange,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                        elevation: 0,
-                      ),
-                      child: const Text('Adquirir', style: TextStyle(fontWeight: FontWeight.w800)),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
+                );
+              }),
+            ]
+          ],
         );
       },
     );
