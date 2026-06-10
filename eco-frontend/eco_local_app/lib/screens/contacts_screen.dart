@@ -1,12 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/user_provider.dart';
+import '../services/chat_service.dart';
 
-class ContactsScreen extends StatelessWidget {
+class ContactsScreen extends ConsumerStatefulWidget {
   const ContactsScreen({super.key});
+
+  @override
+  ConsumerState<ContactsScreen> createState() => _ContactsScreenState();
+}
+
+class _ContactsScreenState extends ConsumerState<ContactsScreen> {
+  late Future<List<Map<String, dynamic>>> _contactsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadContacts();
+  }
+
+  void _loadContacts() {
+    final currentUser = ref.read(userProvider);
+    final currentUserId = currentUser?.id ?? '';
+    final chatService = ref.read(chatServiceProvider);
+    _contactsFuture = chatService.getContacts(currentUserId);
+  }
+
+  Future<void> _handleRefresh() async {
+    setState(() {
+      _loadContacts();
+    });
+    await _contactsFuture;
+  }
+
+  Map<String, List<Map<String, dynamic>>> _groupContactsAlphabetically(List<Map<String, dynamic>> contacts) {
+    final Map<String, List<Map<String, dynamic>>> grouped = {};
+    for (final contact in contacts) {
+      final name = contact['name'] as String? ?? '';
+      final letter = name.isNotEmpty ? name[0].toUpperCase() : '#';
+      
+      final RegExp alpha = RegExp(r'[A-Z]');
+      final key = alpha.hasMatch(letter) ? letter : '#';
+      
+      if (!grouped.containsKey(key)) {
+        grouped[key] = [];
+      }
+      grouped[key]!.add(contact);
+    }
+    
+    final sortedKeys = grouped.keys.toList()..sort();
+    final Map<String, List<Map<String, dynamic>>> sortedGrouped = {};
+    for (final key in sortedKeys) {
+      final list = grouped[key]!;
+      list.sort((a, b) => (a['name'] as String? ?? '').compareTo(b['name'] as String? ?? ''));
+      sortedGrouped[key] = list;
+    }
+    return sortedGrouped;
+  }
 
   Widget _buildActionTile(IconData icon, Color background, String label, BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (label == 'New Friends') {
+          context.push('/contacts/add').then((_) => _handleRefresh());
+        }
+      },
       borderRadius: BorderRadius.circular(18),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
@@ -44,30 +103,57 @@ class ContactsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContactRow({Widget? avatar, required String title}) {
+  Widget _buildContactRow({
+    required BuildContext context,
+    required String contactId,
+    required String title,
+    String? avatar,
+  }) {
+    final colorIndex = contactId.hashCode % 5;
+    final gradients = [
+      [const Color(0xFFEC5B13), const Color(0xFFFF8C39)],
+      [const Color(0xFF3B82F6), const Color(0xFF60A5FA)],
+      [const Color(0xFF10B981), const Color(0xFF34D399)],
+      [const Color(0xFF8B5CF6), const Color(0xFFA78BFA)],
+      [const Color(0xFFF59E0B), const Color(0xFFFBBF24)],
+    ];
+    final selectedGradient = gradients[colorIndex];
+
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.push(
+          '/chat/detail',
+          extra: {
+            'contactId': contactId,
+            'contactName': title,
+            'contactAvatar': avatar ?? '',
+          },
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
         child: Row(
           children: [
-            avatar ??
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFCBD5E1),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    title.isNotEmpty ? title[0] : '?',
-                    style: const TextStyle(
-                      color: Color(0xFF334155),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: selectedGradient,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                title.isNotEmpty ? title[0].toUpperCase() : '?',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             const SizedBox(width: 12),
             Text(
               title,
@@ -80,6 +166,44 @@ class ContactsScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildGroup(String letter, List<Widget> rows) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: const BoxDecoration(
+            color: Color(0xFFF1F5F9),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18),
+              topRight: Radius.circular(18),
+            ),
+          ),
+          child: Text(
+            letter,
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.4,
+              color: Color(0xFF64748B),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(18),
+              bottomRight: Radius.circular(18),
+            ),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
+          ),
+          child: Column(children: rows),
+        ),
+      ],
     );
   }
 
@@ -108,7 +232,7 @@ class ContactsScreen extends StatelessWidget {
                     color: const Color(0xFFE2E8F0),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => context.push('/contacts/add').then((_) => _handleRefresh()),
                       icon: const Icon(Icons.person_add, color: Color(0xFF111827)),
                     ),
                   ),
@@ -133,93 +257,109 @@ class ContactsScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: const Color(0xFFE2E8F0)),
-                      ),
-                      padding: const EdgeInsets.all(14),
-                      child: Column(
-                        children: [
-                          _buildActionTile(Icons.person_add, const Color(0xFFEC5B13), 'New Friends', context),
-                          const SizedBox(height: 10),
-                          _buildActionTile(Icons.verified, const Color(0xFF3B82F6), 'Official Accounts', context),
-                          const SizedBox(height: 10),
-                          _buildActionTile(Icons.groups, const Color(0xFF16A34A), 'Groups', context),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    _buildGroup('A', [
-                      _buildContactRow(
-                        avatar: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: const NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuD6qy8zpwWbFIF9nJJ-GHwArU7D96BFJMNTnh0bJp3Okxdwg1T39kohCz6_O-18Wx1LX_BdD_qzp_L66i6Ozz8sGjX_Kye23Kegms5QvpeWWt41L69ddHiozHe3QHo5iKUIjFpHzOFcpV1zWOnK8NCPHL-bVmTEdPLsE_YkeaMGSCD3tpSS1ZShB8_mtsACbv2fqtLDhceaZBsHQGib5NO8A32V8x8SfXvPp9ssbEU-6hfi_8laaXvLVwXWL-MSQNejwM19QNiy4Y9i'),
+              child: RefreshIndicator(
+                onRefresh: _handleRefresh,
+                color: const Color(0xFFEC5B13),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: const Color(0xFFE2E8F0)),
                         ),
-                        title: 'Adeline Miller',
-                      ),
-                      _buildContactRow(
-                        avatar: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: const NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDpFKkJXcCYwjKY57M1XTMX7VYKnm6GG56hlyypuxBwaWQvOxW8blGL4y1gAwt3kj76v2EKIi2l8w7Y3UieY3jleXKl-5fjWC5GRYFtzT08mrVPeSfmljkR_AIWM3V_NGwVvWFjsEYfN6TmehjjUs38kJIY812-Z3gHAFF0KLvoWobAmO4DS8-ErYX4i3S_77hLui7nmHCSmLhAntUaSKgAhU_YRTxgrO2Ml_LezefdA8wRgjwtttY84ebR9HD8Iz2eFOgsJddF-n32'),
+                        padding: const EdgeInsets.all(14),
+                        child: Column(
+                          children: [
+                            _buildActionTile(Icons.person_add, const Color(0xFFEC5B13), 'New Friends', context),
+                            const SizedBox(height: 10),
+                            _buildActionTile(Icons.verified, const Color(0xFF3B82F6), 'Official Accounts', context),
+                            const SizedBox(height: 10),
+                            _buildActionTile(Icons.groups, const Color(0xFF16A34A), 'Groups', context),
+                          ],
                         ),
-                        title: 'Arthur Morgan',
                       ),
-                    ]),
-                    const SizedBox(height: 16),
-                    _buildGroup('B', [
-                      _buildContactRow(
-                        avatar: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEC5B13),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text('B', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                        ),
-                        title: 'Bistro 24 (Business)',
+                      const SizedBox(height: 24),
+                      
+                      FutureBuilder<List<Map<String, dynamic>>>(
+                        future: _contactsFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 40.0),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFEC5B13)),
+                                ),
+                              ),
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  'Error loading contacts: ${snapshot.error}',
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            );
+                          }
+                          
+                          final contacts = snapshot.data ?? [];
+                          if (contacts.isEmpty) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
+                              child: Column(
+                                children: [
+                                  Icon(Icons.people_outline, size: 48, color: Colors.grey[400]),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    'No contacts yet',
+                                    style: TextStyle(color: Colors.grey[600], fontSize: 16, fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Tap "New Friends" or the add button above to search and add contacts.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.grey[500], fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          
+                          final grouped = _groupContactsAlphabetically(contacts);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: grouped.entries.map((entry) {
+                              final letter = entry.key;
+                              final list = entry.value;
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: _buildGroup(
+                                  letter,
+                                  list.map((contact) {
+                                    return _buildContactRow(
+                                      context: context,
+                                      contactId: contact['id'] as String,
+                                      title: contact['name'] as String? ?? 'No name',
+                                      avatar: contact['avatar'] as String?,
+                                    );
+                                  }).toList(),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        },
                       ),
-                      _buildContactRow(
-                        avatar: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: const NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuC6XH7PyuBVc1skPRJyWB7yRlKk0pPXaUcSLZqI5CR3evtcL3VMiAPxueosTJ4OzKfn63b4cdVzFpDJiQWEiWUxPkzosGd5toc8BGk5fiX__gGzoVCDU6WUSEfrGsvPIjDv8e4VJuObLHdDhgws__RhfG68AGc38AjfMLP5gPu53pnpqWZxBVupR6NNJULajfQaKUQVKtwnPNeI5jTpZ0tuOIUqDcTxajnRkhztKsAarWlzUOYfWz46H5oPbaW33tzv-whXDI78G_Ts'),
-                        ),
-                        title: 'Benjamin Hayes',
-                      ),
-                    ]),
-                    const SizedBox(height: 16),
-                    _buildGroup('C', [
-                      _buildContactRow(
-                        avatar: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: const NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuA1fHwpL5F1qG9R1ZyFRW179Nx1sl8sIOIhIJ8tNkzmaVX-sWeDR_DH48PPmAASDNriDNUe9ntHhadazJJjYn2GMcRMXEpRs-eUU7PdLMS9o7gmZqzmSKOC5hOsMQeebETwuJVIb3u1QOMk7knIktgVdrkf7K2UQwCaGkZgJ9f63lO62XoMQ45MTwVkRQRtMfSF0V6cF2kOrS_e-KKxCERVSSucmmsfzwjxvJyQw-SqqGAU65j62v9ZxkhvEBf9WbCxQot_dOw97cU-'),
-                        ),
-                        title: 'Catherine Pierce',
-                      ),
-                      _buildContactRow(
-                        title: 'Cloud Services Corp',
-                      ),
-                    ]),
-                    const SizedBox(height: 16),
-                    _buildGroup('D', [
-                      _buildContactRow(
-                        avatar: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: const NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBPNQw9k22N-E8MAneUzZFCfesoMJF6_EvMT35KUk7bN7k4dpKufhinGPeW37c5xaahs78NphRlVKc8NRlDQU3sYskNr7DloyJgOpIKtvJr6yOf42OGi0OEQVAk71EvevyWjJrSXFkkFP1Brvx3rg24MPnSsIDGBzHw78jB2psq9IbG-Q4PyZHy7sAUVXZzHtiOU0tG2gydIIUHL8WdABdehZrrAsRT_GSdY59q_FQQcy9LY70oetLceWYitTx_MGHJwsgJ_kCdM8g6'),
-                        ),
-                        title: 'David Chen',
-                      ),
-                    ]),
-                    const SizedBox(height: 80),
-                  ],
+                      const SizedBox(height: 80),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -280,42 +420,4 @@ class _NavItem extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildGroup(String letter, List<Widget> rows) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: const BoxDecoration(
-          color: Color(0xFFF1F5F9),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(18),
-            topRight: Radius.circular(18),
-          ),
-        ),
-        child: Text(
-          letter,
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.4,
-            color: Color(0xFF64748B),
-          ),
-        ),
-      ),
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(18),
-            bottomRight: Radius.circular(18),
-          ),
-          border: Border.all(color: const Color(0xFFE2E8F0)),
-        ),
-        child: Column(children: rows),
-      ),
-    ],
-  );
 }

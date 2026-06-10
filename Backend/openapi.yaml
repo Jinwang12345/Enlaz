@@ -1,71 +1,17 @@
 components:
   schemas:
-    AccessRight:
+    AddContactRequest:
       properties:
-        fields_create:
-          additionalProperties: true
-          default: {}
-          title: Fields Create
-          type: object
-          x_frontend_fieldName: Fields Creation
-          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
-            ...}'
-        fields_edit:
-          additionalProperties: true
-          default: {}
-          title: Fields Edit
-          type: object
-          x_frontend_fieldName: Fields Edition
-          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
-            ...}'
-        fields_visible:
-          additionalProperties: true
-          default: {}
-          title: Fields Visible
-          type: object
-          x_frontend_fieldName: Fields Visibility
-          x_frontend_placeholder: '{''field_1'': 1, ''field_2'': 1, ''field_3'': 0,
-            ...}'
-        id:
-          default: ''
-          title: Id
+        email_or_name:
+          title: Email Or Name
           type: string
-        model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: ''
-          title: Model
-          x_frontend_fieldName: Model
-          x_frontend_widget: ModelsSelectableWidget
-        name:
-          default: ''
-          title: Name
+        user_id:
+          title: User Id
           type: string
-        operations:
-          additionalProperties: true
-          default: {}
-          title: Operations
-          type: object
-          x_frontend_fieldName: Operations Permitted
-          x_frontend_placeholder: '{''create'': 1, ''read'': 1, ''update'': 0, ''delete'':
-            0, ''search'': 1}'
-        owner:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: false
-          title: Owner
-          x_frontend_fieldName: Only applies to own records
-        role:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: ''
-          title: Role
-          x_frontend_fieldName: Role
-          x_frontend_relation: Role
-      title: AccessRight
+      required:
+      - user_id
+      - email_or_name
+      title: AddContactRequest
       type: object
     Auth:
       properties:
@@ -75,34 +21,31 @@ components:
         password:
           title: Password
           type: string
+        validated:
+          default: false
+          title: Validated
+          type: boolean
       required:
       - email
       - password
       title: Auth
       type: object
-    Body_search_access_rights_accessrights__post:
+    Body_refresh_token_route_auth_refresh_user__post:
       properties:
-        filters:
-          additionalProperties: true
-          default: {}
-          title: Filters
-          type: object
-        orders:
-          additionalProperties: true
-          default: {}
-          title: Orders
-          type: object
-      title: Body_search_access_rights_accessrights__post
+        refresh_token:
+          title: Refresh Token
+          type: string
+      required:
+      - refresh_token
+      title: Body_refresh_token_route_auth_refresh_user__post
       type: object
     Body_search_element_roles__post:
       properties:
         filters:
-          additionalProperties: true
           default: {}
           title: Filters
           type: object
         orders:
-          additionalProperties: true
           default: {}
           title: Orders
           type: object
@@ -111,12 +54,10 @@ components:
     Body_search_element_shops__post:
       properties:
         filters:
-          additionalProperties: true
           default: {}
           title: Filters
           type: object
         orders:
-          additionalProperties: true
           default: {}
           title: Orders
           type: object
@@ -125,12 +66,10 @@ components:
     Body_search_element_transactions__post:
       properties:
         filters:
-          additionalProperties: true
           default: {}
           title: Filters
           type: object
         orders:
-          additionalProperties: true
           default: {}
           title: Orders
           type: object
@@ -139,12 +78,10 @@ components:
     Body_search_element_users__post:
       properties:
         filters:
-          additionalProperties: true
           default: {}
           title: Filters
           type: object
         orders:
-          additionalProperties: true
           default: {}
           title: Orders
           type: object
@@ -153,16 +90,26 @@ components:
     Body_search_element_wallets__post:
       properties:
         filters:
-          additionalProperties: true
           default: {}
           title: Filters
           type: object
         orders:
-          additionalProperties: true
           default: {}
           title: Orders
           type: object
       title: Body_search_element_wallets__post
+      type: object
+    Body_search_shards_shards__post:
+      properties:
+        filters:
+          default: {}
+          title: Filters
+          type: object
+        orders:
+          default: {}
+          title: Orders
+          type: object
+      title: Body_search_shards_shards__post
       type: object
     HTTPValidationError:
       properties:
@@ -184,17 +131,19 @@ components:
           default: ''
           title: Id
           type: string
-        name:
-          title: Name
-          type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
         type:
           $ref: '#/components/schemas/Type'
       required:
-      - name
       - type
       - coordinates
       title: Location
@@ -221,10 +170,16 @@ components:
         name:
           title: Name
           type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
       required:
       - name
       title: Role
@@ -247,6 +202,54 @@ components:
       - recipient_email
       - amount
       title: SendRequest
+      type: object
+    Shard:
+      properties:
+        id:
+          default: ''
+          title: Id
+          type: string
+        key:
+          description: Nombre del campo en los modelos (por ejemplo 'region')
+          title: Key
+          type: string
+          x_frontend_editable: true
+          x_frontend_fieldDescription: Campo shard en los modelos
+          x_frontend_fieldName: Key
+          x_frontend_placeholder: Nombre del campo shard
+        name:
+          description: "Texto que se mostrar\xE1 en la UI para este shard"
+          title: Name
+          type: string
+          x_frontend_editable: true
+          x_frontend_fieldDescription: Nombre visible en la UI
+          x_frontend_fieldName: Name
+          x_frontend_placeholder: Nombre visible
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+        values:
+          description: "Lista de valores v\xE1lidos para este shard"
+          items:
+            type: string
+          title: Values
+          type: array
+          x_frontend_editable: true
+          x_frontend_fieldDescription: Valores disponibles
+          x_frontend_fieldName: Values
+          x_frontend_placeholder: Lista de valores
+      required:
+      - key
+      - name
+      - values
+      title: Shard
       type: object
     Shop:
       properties:
@@ -282,15 +285,73 @@ components:
           - type: string
           - type: 'null'
           title: Neighborhood
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
       required:
       - name
       - category
       - location
       title: Shop
+      type: object
+    ShopUpdate:
+      properties:
+        activity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Activity
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        category:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category
+        id:
+          default: ''
+          title: Id
+          type: string
+        is_commercial_axis:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Commercial Axis
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/Location'
+          - type: 'null'
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        neighborhood:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Neighborhood
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+      title: ShopUpdate
       type: object
     TopUpRequest:
       properties:
@@ -334,13 +395,16 @@ components:
           default: ''
           title: Id
           type: string
-        name:
-          title: Name
-          type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
         type:
           description: Transaction type (topup, send, receive, payment)
           title: Type
@@ -352,12 +416,60 @@ components:
           x_required: true
           x_type: objectId
       required:
-      - name
       - user_id
       - amount
       - type
       - description
       title: Transaction
+      type: object
+    TransactionUpdate:
+      properties:
+        amount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount
+        counterparty:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Counterparty
+        created_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created At
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        id:
+          default: ''
+          title: Id
+          type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      title: TransactionUpdate
       type: object
     Type:
       enum:
@@ -383,10 +495,16 @@ components:
           description: User first name
           title: Name
           type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
         password:
           description: User password
           format: password
@@ -406,6 +524,16 @@ components:
           title: Roles
           type: array
           x_frontend_relation: Role
+        shard:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: "Shard o regi\xF3n asignada a este usuario"
+          title: Shard
+          x_frontend_editable: true
+          x_frontend_fieldDescription: "Regi\xF3n asignada al usuario"
+          x_frontend_fieldName: Shard
+          x_frontend_placeholder: "Introduce la regi\xF3n"
         surnames:
           anyOf:
           - type: string
@@ -413,19 +541,77 @@ components:
           description: User last name
           title: Surnames
       required:
-      - name
       - email
       - password
+      - name
       title: User
+      type: object
+      x-auth: true
+    UserUpdate:
+      properties:
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        id:
+          default: ''
+          title: Id
+          type: string
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+        password:
+          anyOf:
+          - format: password
+            type: string
+            writeOnly: true
+          - type: 'null'
+          title: Password
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        roles:
+          default: []
+          items:
+            type: string
+          title: Roles
+          type: array
+          x_frontend_relation: Role
+        shard:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: "Shard o regi\xF3n asignada a este usuario"
+          title: Shard
+          x_frontend_editable: true
+          x_frontend_fieldDescription: "Regi\xF3n asignada al usuario"
+          x_frontend_fieldName: Shard
+          x_frontend_placeholder: "Introduce la regi\xF3n"
+        surnames:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Surnames
+      title: UserUpdate
       type: object
       x-auth: true
     ValidationError:
       properties:
-        ctx:
-          title: Context
-          type: object
-        input:
-          title: Input
         loc:
           items:
             anyOf:
@@ -471,13 +657,16 @@ components:
           default: ''
           title: Id
           type: string
-        name:
-          title: Name
-          type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
         owner:
-          default: ''
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Owner
-          type: string
         user_id:
           description: The user ID
           title: User Id
@@ -485,7 +674,6 @@ components:
           x_required: true
           x_type: objectId
       required:
-      - name
       - address
       - user_id
       title: Wallet
@@ -500,7 +688,6 @@ components:
           type: string
         transactions:
           items:
-            additionalProperties: true
             type: object
           title: Transactions
           type: array
@@ -509,6 +696,44 @@ components:
       - currency
       - transactions
       title: WalletResponse
+      type: object
+    WalletUpdate:
+      properties:
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        balance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Balance
+        currency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Currency
+        id:
+          default: ''
+          title: Id
+          type: string
+        nicename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nicename
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      title: WalletUpdate
       type: object
   securitySchemes:
     OAuth2PasswordBearer:
@@ -522,14 +747,178 @@ info:
   version: 0.1.0
 openapi: 3.1.0
 paths:
-  /accessright/:
+  /api/bonuses/buy/{template_id}:
     post:
-      operationId: create_access_rights_route_accessright__post
+      operationId: buy_bonus_api_bonuses_buy__template_id__post
+      parameters:
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          title: Template Id
+          type: string
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Buy Bonus
+      tags:
+      - Bonuses
+  /api/bonuses/my-bonuses/{target_user_id}:
+    get:
+      operationId: get_my_bonuses_api_bonuses_my_bonuses__target_user_id__get
+      parameters:
+      - in: path
+        name: target_user_id
+        required: true
+        schema:
+          title: Target User Id
+          type: string
+      - in: header
+        name: authorization
+        required: true
+        schema:
+          title: Authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                title: Response Get My Bonuses Api Bonuses My Bonuses  Target User
+                  Id  Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get My Bonuses
+      tags:
+      - Bonuses
+  /api/bonuses/templates:
+    get:
+      operationId: get_templates_api_bonuses_templates_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                title: Response Get Templates Api Bonuses Templates Get
+                type: array
+          description: Successful Response
+      summary: Get Templates
+      tags:
+      - Bonuses
+  /api/chat/conversations/{user_id}:
+    get:
+      operationId: get_conversations_api_chat_conversations__user_id__get
+      parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          title: User Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Conversations
+      tags:
+      - Chat
+  /api/chat/history/{user_id}/{other_user_id}:
+    get:
+      operationId: get_chat_history_api_chat_history__user_id___other_user_id__get
+      parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          title: User Id
+          type: string
+      - in: path
+        name: other_user_id
+        required: true
+        schema:
+          title: Other User Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Chat History
+      tags:
+      - Chat
+  /api/chat/status/{user_id}:
+    get:
+      operationId: get_user_status_api_chat_status__user_id__get
+      parameters:
+      - in: path
+        name: user_id
+        required: true
+        schema:
+          title: User Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get User Status
+      tags:
+      - Chat
+  /api/contacts/add:
+    post:
+      operationId: add_contact_api_contacts_add_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccessRight'
+              $ref: '#/components/schemas/AddContactRequest'
         required: true
       responses:
         '200':
@@ -543,57 +932,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Create Access Rights Route
+      summary: Add Contact
       tags:
-      - AccessRight
-  /accessright/{element_id}:
-    delete:
-      operationId: delete_access_rights_accessright__element_id__delete
-      parameters:
-      - in: path
-        name: element_id
-        required: true
-        schema:
-          title: Element Id
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                title: Response Delete Access Rights Accessright  Element Id  Delete
-                type: string
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Delete Access Rights
-      tags:
-      - AccessRight
+      - Chat
+  /api/contacts/{user_id}:
     get:
-      operationId: read_access_rights_accessright__element_id__get
+      operationId: get_contacts_api_contacts__user_id__get
       parameters:
       - in: path
-        name: element_id
+        name: user_id
         required: true
         schema:
-          title: Element Id
+          title: User Id
           type: string
       responses:
         '200':
           content:
             application/json:
-              schema:
-                additionalProperties: true
-                title: Response Read Access Rights Accessright  Element Id  Get
-                type: object
+              schema: {}
           description: Successful Response
         '422':
           content:
@@ -601,36 +957,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Read Access Rights
+      summary: Get Contacts
       tags:
-      - AccessRight
-    put:
-      operationId: update_access_rights_accessright__element_id__put
+      - Chat
+  /api/users/search:
+    get:
+      operationId: search_users_api_users_search_get
       parameters:
-      - in: path
-        name: element_id
+      - in: query
+        name: query
         required: true
         schema:
-          title: Element Id
+          title: Query
           type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: true
-              title: Values
-              type: object
-        required: true
+      - in: query
+        name: exclude_user_id
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exclude User Id
       responses:
         '200':
           content:
             application/json:
-              schema:
-                additionalProperties: true
-                title: Response Update Access Rights Accessright  Element Id  Put
-                type: object
+              schema: {}
           description: Successful Response
         '422':
           content:
@@ -638,54 +990,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Update Access Rights
+      summary: Search Users
       tags:
-      - AccessRight
-  /accessrights/:
-    post:
-      operationId: search_access_rights_accessrights__post
-      parameters:
-      - in: query
-        name: skip
-        required: false
-        schema:
-          default: 0
-          title: Skip
-          type: integer
-      - in: query
-        name: limit
-        required: false
-        schema:
-          default: 10
-          title: Limit
-          type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Body_search_access_rights_accessrights__post'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                additionalProperties: true
-                title: Response Search Access Rights Accessrights  Post
-                type: object
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Search Access Rights
-      tags:
-      - AccessRight
+      - Chat
   /auth/login/user/:
     post:
       operationId: login_user_auth_login_user__post
@@ -700,7 +1007,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Login User Auth Login User  Post
                 type: object
           description: Successful Response
@@ -711,6 +1017,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Login User
+      tags:
+      - User
+  /auth/refresh/user/:
+    post:
+      operationId: refresh_token_route_auth_refresh_user__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_refresh_token_route_auth_refresh_user__post'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Refresh Token Route Auth Refresh User  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Refresh Token Route
       tags:
       - User
   /auth/register/user/:
@@ -727,7 +1059,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Register User Auth Register User  Post
                 type: object
           description: Successful Response
@@ -755,7 +1086,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Verify User Auth Verify User  Token  Get
                 type: object
           description: Successful Response
@@ -768,6 +1098,96 @@ paths:
       summary: Verify User
       tags:
       - User
+  /nice/shop/{nicename}:
+    get:
+      description: Devuelve un {model_name} a partir del nicename
+      operationId: Get_shop_by_nicename_nice_shop__nicename__get
+      parameters:
+      - in: path
+        name: nicename
+        required: true
+        schema:
+          title: Nicename
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Get Shop By Nicename Nice Shop  Nicename  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Get Shop By Nicename
+      tags:
+      - Shop
+  /nice/transaction/{nicename}:
+    get:
+      description: Devuelve un {model_name} a partir del nicename
+      operationId: Get_transaction_by_nicename_nice_transaction__nicename__get
+      parameters:
+      - in: path
+        name: nicename
+        required: true
+        schema:
+          title: Nicename
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Get Transaction By Nicename Nice Transaction  Nicename  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Get Transaction By Nicename
+      tags:
+      - Transaction
+  /nice/wallet/{nicename}:
+    get:
+      description: Devuelve un {model_name} a partir del nicename
+      operationId: Get_wallet_by_nicename_nice_wallet__nicename__get
+      parameters:
+      - in: path
+        name: nicename
+        required: true
+        schema:
+          title: Nicename
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Get Wallet By Nicename Nice Wallet  Nicename  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Get Wallet By Nicename
+      tags:
+      - Wallet
   /role/:
     post:
       operationId: create_element_role__post
@@ -782,7 +1202,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Create Element Role  Post
                 type: object
           description: Successful Response
@@ -840,7 +1259,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Read Element Role  Element Id  Get
                 type: object
           description: Successful Response
@@ -868,7 +1286,6 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: true
               title: Values
               type: object
         required: true
@@ -877,7 +1294,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Update Element Role  Element Id  Put
                 type: object
           description: Successful Response
@@ -914,13 +1330,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_search_element_roles__post'
+              allOf:
+              - $ref: '#/components/schemas/Body_search_element_roles__post'
+              title: Body
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Search Element Roles  Post
                 type: object
           description: Successful Response
@@ -935,6 +1352,169 @@ paths:
       summary: Search Element
       tags:
       - Role
+  /shard/:
+    post:
+      operationId: create_shard_shard__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shard'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Create Shard Shard  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Create Shard
+      tags:
+      - Shard
+  /shard/{element_id}:
+    delete:
+      operationId: delete_shard_shard__element_id__delete
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Delete Shard Shard  Element Id  Delete
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Delete Shard
+      tags:
+      - Shard
+    get:
+      operationId: read_shard_shard__element_id__get
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Read Shard Shard  Element Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Read Shard
+      tags:
+      - Shard
+    put:
+      operationId: update_shard_shard__element_id__put
+      parameters:
+      - in: path
+        name: element_id
+        required: true
+        schema:
+          title: Element Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shard'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Update Shard Shard  Element Id  Put
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Update Shard
+      tags:
+      - Shard
+  /shards/:
+    post:
+      operationId: search_shards_shards__post
+      parameters:
+      - in: query
+        name: skip
+        required: false
+        schema:
+          default: 0
+          title: Skip
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          title: Limit
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Body_search_shards_shards__post'
+              title: Body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Search Shards Shards  Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Search Shards
+      tags:
+      - Shard
   /shop/:
     post:
       operationId: create_element_shop__post
@@ -949,7 +1529,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Create Element Shop  Post
                 type: object
           description: Successful Response
@@ -1007,7 +1586,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Read Element Shop  Element Id  Get
                 type: object
           description: Successful Response
@@ -1035,16 +1613,13 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: true
-              title: Values
-              type: object
+              $ref: '#/components/schemas/ShopUpdate'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Update Element Shop  Element Id  Put
                 type: object
           description: Successful Response
@@ -1081,13 +1656,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_search_element_shops__post'
+              allOf:
+              - $ref: '#/components/schemas/Body_search_element_shops__post'
+              title: Body
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Search Element Shops  Post
                 type: object
           description: Successful Response
@@ -1100,6 +1676,38 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Search Element
+      tags:
+      - Shop
+  /shops/aggregate:
+    post:
+      operationId: aggregate_users_shops_aggregate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Pipeline MongoDB aggregation
+              items:
+                type: object
+              title: Pipeline
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Aggregate Users Shops Aggregate Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Aggregate Users
       tags:
       - Shop
   /transaction/:
@@ -1116,7 +1724,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Create Element Transaction  Post
                 type: object
           description: Successful Response
@@ -1174,7 +1781,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Read Element Transaction  Element Id  Get
                 type: object
           description: Successful Response
@@ -1202,16 +1808,13 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: true
-              title: Values
-              type: object
+              $ref: '#/components/schemas/TransactionUpdate'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Update Element Transaction  Element Id  Put
                 type: object
           description: Successful Response
@@ -1248,13 +1851,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_search_element_transactions__post'
+              allOf:
+              - $ref: '#/components/schemas/Body_search_element_transactions__post'
+              title: Body
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Search Element Transactions  Post
                 type: object
           description: Successful Response
@@ -1267,6 +1871,38 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Search Element
+      tags:
+      - Transaction
+  /transactions/aggregate:
+    post:
+      operationId: aggregate_users_transactions_aggregate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Pipeline MongoDB aggregation
+              items:
+                type: object
+              title: Pipeline
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Aggregate Users Transactions Aggregate Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Aggregate Users
       tags:
       - Transaction
   /user/:
@@ -1283,7 +1919,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Create Element User  Post
                 type: object
           description: Successful Response
@@ -1341,7 +1976,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Read Element User  Element Id  Get
                 type: object
           description: Successful Response
@@ -1369,16 +2003,13 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: true
-              title: Values
-              type: object
+              $ref: '#/components/schemas/UserUpdate'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Update Element User  Element Id  Put
                 type: object
           description: Successful Response
@@ -1415,13 +2046,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_search_element_users__post'
+              allOf:
+              - $ref: '#/components/schemas/Body_search_element_users__post'
+              title: Body
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Search Element Users  Post
                 type: object
           description: Successful Response
@@ -1434,6 +2066,38 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Search Element
+      tags:
+      - User
+  /users/aggregate:
+    post:
+      operationId: aggregate_users_users_aggregate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Pipeline MongoDB aggregation
+              items:
+                type: object
+              title: Pipeline
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Aggregate Users Users Aggregate Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Aggregate Users
       tags:
       - User
   /wallet/:
@@ -1475,7 +2139,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Create Element Wallet  Post
                 type: object
           description: Successful Response
@@ -1488,6 +2151,66 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Create Element
+      tags:
+      - Wallet
+  /wallet/api/chat/conversations/{user_id}:
+    get:
+      operationId: get_api_chat_conversations_user_id_wallet_api_chat_conversations__user_id__get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Api Chat Conversations User Id
+      tags:
+      - Wallet
+  /wallet/api/chat/history/{user_id}/{other_user_id}:
+    get:
+      operationId: get_api_chat_history_user_id_other_user_id_wallet_api_chat_history__user_id___other_user_id__get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Api Chat History User Id Other User Id
+      tags:
+      - Wallet
+  /wallet/api/contacts/add:
+    post:
+      operationId: post_api_contacts_add_wallet_api_contacts_add_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Post Api Contacts Add
+      tags:
+      - Wallet
+  /wallet/api/contacts/{user_id}:
+    get:
+      operationId: get_api_contacts_user_id_wallet_api_contacts__user_id__get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Api Contacts User Id
+      tags:
+      - Wallet
+  /wallet/api/users/search:
+    get:
+      operationId: get_api_users_search_wallet_api_users_search_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Api Users Search
       tags:
       - Wallet
   /wallet/pay:
@@ -1667,6 +2390,66 @@ paths:
       summary: Get Transactions
       tags:
       - Wallet
+  /wallet/wallet/pay:
+    post:
+      operationId: post_wallet_pay_wallet_wallet_pay_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Post Wallet Pay
+      tags:
+      - Wallet
+  /wallet/wallet/send:
+    post:
+      operationId: post_wallet_send_wallet_wallet_send_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Post Wallet Send
+      tags:
+      - Wallet
+  /wallet/wallet/shops/nearby:
+    get:
+      operationId: get_wallet_shops_nearby_wallet_wallet_shops_nearby_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Wallet Shops Nearby
+      tags:
+      - Wallet
+  /wallet/wallet/topup:
+    post:
+      operationId: post_wallet_topup_wallet_wallet_topup_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Post Wallet Topup
+      tags:
+      - Wallet
+  /wallet/wallet/transactions:
+    get:
+      operationId: get_wallet_transactions_wallet_wallet_transactions_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Get Wallet Transactions
+      tags:
+      - Wallet
   /wallet/{element_id}:
     delete:
       operationId: delete_element_wallet__element_id__delete
@@ -1710,7 +2493,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Read Element Wallet  Element Id  Get
                 type: object
           description: Successful Response
@@ -1738,16 +2520,13 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: true
-              title: Values
-              type: object
+              $ref: '#/components/schemas/WalletUpdate'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Update Element Wallet  Element Id  Put
                 type: object
           description: Successful Response
@@ -1784,13 +2563,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Body_search_element_wallets__post'
+              allOf:
+              - $ref: '#/components/schemas/Body_search_element_wallets__post'
+              title: Body
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: true
                 title: Response Search Element Wallets  Post
                 type: object
           description: Successful Response
@@ -1803,5 +2583,37 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Search Element
+      tags:
+      - Wallet
+  /wallets/aggregate:
+    post:
+      operationId: aggregate_users_wallets_aggregate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Pipeline MongoDB aggregation
+              items:
+                type: object
+              title: Pipeline
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                title: Response Aggregate Users Wallets Aggregate Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      summary: Aggregate Users
       tags:
       - Wallet

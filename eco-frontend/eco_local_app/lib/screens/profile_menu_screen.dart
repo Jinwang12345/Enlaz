@@ -26,7 +26,8 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('My QR Code', textAlign: TextAlign.center),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        title: const Text('Mi Código QR', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.bold)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -40,124 +41,51 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Text('ID: $userId', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text('ID: $userId', style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cerrar', style: TextStyle(color: Color(0xFFEC5B13), fontWeight: FontWeight.bold)),
+          ),
         ],
       ),
     );
   }
 
   void _showTopUpDialog() {
-    final amountController = TextEditingController();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Top-up Wallet'),
-        content: TextField(
-          controller: amountController,
-          decoration: const InputDecoration(labelText: 'Amount', prefixText: '€'),
-          keyboardType: TextInputType.number,
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () async {
-              final amount = double.tryParse(amountController.text);
-              if (amount != null && amount > 0) {
-                final success = await ref.read(walletProvider.notifier).topUp(amount);
-                if (success) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Top-up successful')));
-                }
-              }
-            },
-            child: const Text('Confirm'),
-          ),
-        ],
-      ),
-    );
+    context.push('/wallet/topup');
   }
 
   void _showSendDialog() {
-    final emailController = TextEditingController();
-    final amountController = TextEditingController();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Send Money'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'Recipient Email'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextField(
-              controller: amountController,
-              decoration: const InputDecoration(labelText: 'Amount', prefixText: '€'),
-              keyboardType: TextInputType.number,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () async {
-              final amount = double.tryParse(amountController.text);
-              if (amount != null && amount > 0 && emailController.text.isNotEmpty) {
-                final success = await ref.read(walletProvider.notifier).sendMoney(emailController.text, amount);
-                if (success) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Money sent successfully')));
-                }
-              }
-            },
-            child: const Text('Send'),
-          ),
-        ],
-      ),
-    );
+    context.push('/wallet/send');
   }
 
   void _showPayDialog() {
-    final amountController = TextEditingController();
-    final merchantController = TextEditingController();
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Simulate Payment'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: merchantController,
-              decoration: const InputDecoration(labelText: 'Merchant Name'),
-            ),
-            TextField(
-              controller: amountController,
-              decoration: const InputDecoration(labelText: 'Amount', prefixText: '€'),
-              keyboardType: TextInputType.number,
-            ),
-          ],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        title: const Text(
+          'Pago con Código QR',
+          style: TextStyle(
+            fontFamily: 'Manrope',
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF0D631B),
+          ),
+        ),
+        content: const Text(
+          'La función de pago por código QR se implementará próximamente.\n\nPodrás escanear códigos QR en comercios locales asociados para realizar pagos de forma instantánea y segura.',
+          style: TextStyle(fontFamily: 'Inter', height: 1.5, fontSize: 14),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () async {
-              final amount = double.tryParse(amountController.text);
-              if (amount != null && amount > 0 && merchantController.text.isNotEmpty) {
-                final success = await ref.read(walletProvider.notifier).pay(amount, merchantController.text);
-                if (success) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Payment successful')));
-                }
-              }
-            },
-            child: const Text('Pay'),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Entendido',
+              style: TextStyle(color: Color(0xFF0D631B), fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -191,7 +119,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                         children: [
                           const Expanded(
                             child: Text(
-                              'Me',
+                              'Mi Perfil',
                               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF111827)),
                             ),
                           ),
@@ -318,7 +246,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Total Balance', style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w500)),
+                                      const Text('Saldo Total', style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w500)),
                                       const SizedBox(height: 8),
                                       Text(
                                         '${walletState.wallet?.balance.toStringAsFixed(2) ?? '0.00'} €',
@@ -334,9 +262,9 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _ActionButton(label: 'Pay', icon: Icons.payments, onTap: _showPayDialog),
-                                _ActionButton(label: 'Send', icon: Icons.send, onTap: _showSendDialog),
-                                _ActionButton(label: 'Top-up', icon: Icons.add_circle, onTap: _showTopUpDialog),
+                                _ActionButton(label: 'Pagar', icon: Icons.payments, onTap: _showPayDialog),
+                                _ActionButton(label: 'Enviar', icon: Icons.send, onTap: _showSendDialog),
+                                _ActionButton(label: 'Ingresar', icon: Icons.add_circle, onTap: _showTopUpDialog),
                               ],
                             ),
                           ],
@@ -351,7 +279,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'RECENT TRANSACTIONS',
+                            'TRANSACCIONES RECIENTES',
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1.4, color: Color(0xFF111827)),
                           ),
                           const SizedBox(height: 12),
@@ -364,7 +292,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                             child: walletState.isLoading
                                 ? const Padding(padding: EdgeInsets.all(20), child: Center(child: CircularProgressIndicator()))
                                 : (walletState.wallet?.transactions.isEmpty ?? true)
-                                    ? const Padding(padding: EdgeInsets.all(20), child: Center(child: Text('No transactions yet')))
+                                    ? const Padding(padding: EdgeInsets.all(20), child: Center(child: Text('Aún no hay transacciones')))
                                     : ListView.separated(
                                         shrinkWrap: true,
                                         physics: const NeverScrollableScrollPhysics(),
@@ -387,7 +315,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'IDENTITY & TRAVEL',
+                            'IDENTIDAD Y VIAJES',
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1.4, color: Color(0xFF111827)),
                           ),
                           const SizedBox(height: 12),
@@ -402,15 +330,23 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                                 _LinkTile(
                                   icon: Icons.confirmation_number,
                                   iconColor: const Color(0xFF2563EB),
-                                  title: 'Digital Tickets',
-                                  subtitle: '2 Upcoming trips',
+                                  title: 'Billetes Digitales',
+                                  subtitle: '2 próximos viajes',
                                 ),
                                 const Divider(height: 1, color: Color(0xFFE2E8F0)),
                                 _LinkTile(
                                   icon: Icons.badge,
                                   iconColor: const Color(0xFF7C3AED),
-                                  title: 'Digital Passport',
-                                  subtitle: 'Verified • Expires 2029',
+                                  title: 'Pasaporte Digital',
+                                  subtitle: 'Verificado • Expira en 2029',
+                                ),
+                                const Divider(height: 1, color: Color(0xFFE2E8F0)),
+                                _LinkTile(
+                                  icon: Icons.local_activity_rounded,
+                                  iconColor: const Color(0xFFEC5B13),
+                                  title: 'Bonos de Consumo',
+                                  subtitle: 'Consulta bonos disponibles y tus cupones',
+                                  onTap: () => context.push('/wallet/bonuses'),
                                 ),
                               ],
                             ),
@@ -426,7 +362,7 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'MINI-PROGRAMS',
+                            'MINIPROGRAMAS',
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1.4, color: Color(0xFF111827)),
                           ),
                           const SizedBox(height: 12),
@@ -438,14 +374,14 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                             crossAxisSpacing: 12,
                             childAspectRatio: 0.85,
                             children: const [
-                              _MiniProgramCard(label: 'Ride Hailing', icon: Icons.local_taxi),
-                              _MiniProgramCard(label: 'Food Delivery', icon: Icons.delivery_dining),
-                              _MiniProgramCard(label: 'City Services', icon: Icons.location_city),
-                              _MiniProgramCard(label: 'Tickets', icon: Icons.movie),
-                              _MiniProgramCard(label: 'Shopping', icon: Icons.shopping_bag),
-                              _MiniProgramCard(label: 'Health', icon: Icons.fitness_center),
-                              _MiniProgramCard(label: 'Charging', icon: Icons.ev_station),
-                              _MiniProgramCard(label: 'More', icon: Icons.more_horiz, isDashed: true),
+                              _MiniProgramCard(label: 'Transporte', icon: Icons.local_taxi),
+                              _MiniProgramCard(label: 'Comida a Domicilio', icon: Icons.delivery_dining),
+                              _MiniProgramCard(label: 'Servicios Ciudadanos', icon: Icons.location_city),
+                              _MiniProgramCard(label: 'Entradas', icon: Icons.movie),
+                              _MiniProgramCard(label: 'Compras', icon: Icons.shopping_bag),
+                              _MiniProgramCard(label: 'Salud', icon: Icons.fitness_center),
+                              _MiniProgramCard(label: 'Carga EV', icon: Icons.ev_station),
+                              _MiniProgramCard(label: 'Más', icon: Icons.more_horiz, isDashed: true),
                             ],
                           ),
                         ],
@@ -473,9 +409,9 @@ class _ProfileMenuScreenState extends ConsumerState<ProfileMenuScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _BottomNavItem(onTap: () => context.go('/chat'), label: 'Chat', icon: Icons.chat_bubble_outline),
-                      _BottomNavItem(onTap: () => context.go('/contacts'), label: 'Contacts', icon: Icons.group_outlined),
-                      _BottomNavItem(onTap: () => context.go('/discover'), label: 'Discover', icon: Icons.explore_outlined),
-                      _BottomNavItem(onTap: () => context.go('/'), label: 'Profile', icon: Icons.account_circle, active: true),
+                      _BottomNavItem(onTap: () => context.go('/contacts'), label: 'Contactos', icon: Icons.group_outlined),
+                      _BottomNavItem(onTap: () => context.go('/discover'), label: 'Descubrir', icon: Icons.explore_outlined),
+                      _BottomNavItem(onTap: () => context.go('/'), label: 'Perfil', icon: Icons.account_circle, active: true),
                     ],
                   ),
                 ),
@@ -570,13 +506,14 @@ class _LinkTile extends StatelessWidget {
   final Color iconColor;
   final String title;
   final String subtitle;
+  final VoidCallback? onTap;
 
-  const _LinkTile({required this.icon, required this.iconColor, required this.title, required this.subtitle});
+  const _LinkTile({required this.icon, required this.iconColor, required this.title, required this.subtitle, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap ?? () {},
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(

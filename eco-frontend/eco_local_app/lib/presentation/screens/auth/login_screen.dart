@@ -23,15 +23,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white.withOpacity(0.8),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.eco, color: AppColors.primary),
-          onPressed: () {},
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 12.0, bottom: 12.0),
+          child: Image.asset(
+            'assets/logo_enlaz.png',
+            fit: BoxFit.contain,
+          ),
         ),
+        leadingWidth: 48,
         title: const Text(
-          'Eco-Local Hub',
+          'Enlaz',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF2F4F2F),
+            color: AppColors.primary,
           ),
         ),
         actions: [
@@ -46,23 +50,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Hero Section
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: AppColors.primaryContainer.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: const Icon(
-                Icons.energy_savings_leaf,
-                size: 40,
-                color: AppColors.primary,
-              ),
+            // Hero Section (Logo displayed directly, unboxed and scaled to exact requested dimensions)
+            Image.asset(
+              'assets/logo_enlaz.png',
+              width: 248,
+              height: 188,
+              fit: BoxFit.contain,
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             const Text(
-              'Bienvenido de nuevo',
+              'Bienvenido a Enlaz',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -72,7 +69,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Sigue impulsando el cambio positivo en tu comunidad local hoy.',
+              'Conéctate y comparte con tu comunidad local hoy mismo.',
               style: TextStyle(
                 fontSize: 16,
                 color: AppColors.onSurfaceVariant,
@@ -107,7 +104,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         controller: _emailController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail, color: Colors.grey),
-                          hintText: 'ejemplo@ecolocal.com',
+                          hintText: 'ejemplo@enlaz.com',
                           filled: true,
                           fillColor: AppColors.surfaceContainerHigh,
                           border: OutlineInputBorder(

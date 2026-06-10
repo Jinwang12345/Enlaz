@@ -155,7 +155,7 @@ class DiscoverScreen extends StatelessWidget {
                           _DiscoverTile(
                             icon: Icons.explore,
                             iconColor: const Color(0xFF16A34A),
-                            label: 'Eco-Local Map',
+                            label: 'Enlaz Map',
                             onTap: () => context.go('/nearby'),
                           ),
                           const Divider(height: 1, color: Color(0xFFE2E8F0)),

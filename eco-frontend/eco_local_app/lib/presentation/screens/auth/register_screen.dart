@@ -45,9 +45,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Header
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
+            // Logo displayed directly, unboxed and scaled to exact requested dimensions
+            Image.asset(
+              'assets/logo_enlaz.png',
+              width: 248,
+              height: 188,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(height: 16),
             const Text(
-              'Eco-Local Hub',
+              'Enlaz',
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
@@ -56,14 +64,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Únete a nuestra comunidad sostenible',
+              'Únete a nuestra comunidad local hoy mismo',
               style: TextStyle(
                 fontSize: 16,
                 color: AppColors.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 36),
 
             // Register Form
             Form(

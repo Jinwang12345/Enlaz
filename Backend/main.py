@@ -13,8 +13,12 @@ import requests
 import yaml
 import json
 import threading
+import inspect
+import subprocess
+import re
 from dotenv import load_dotenv
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 def load_config():
     load_dotenv()
@@ -102,20 +106,71 @@ laia_config_path = Path(__file__).parent.parent / "laia.json"
 with open(laia_config_path, "r", encoding="utf-8") as f:
     laia_config = json.load(f)
 
+
+def build_laia_fastapi_kwargs():
+    supported_params = set()
+    try:
+        supported_params.update(inspect.signature(LaiaFastApi).parameters.keys())
+    except Exception:
+        pass
+    try:
+        supported_params.update(inspect.signature(LaiaFastApi.__init__).parameters.keys())
+    except Exception:
+        pass
+
+    kwargs = {
+        "openapi": openapi_path,
+        "backend_folder_name": backend_folder_name,
+        "db": db,
+        "repository": MongoModelRepository,
+        "repositoryAPI": FastAPIOpenapiRepository,
+        "jwtSecretKey": backend_jwt_secret_key,
+    }
+
+    if "jwtRefreshSecretKey" in supported_params:
+        kwargs["jwtRefreshSecretKey"] = backend_jwt_refresh_secret_key
+    if "use_ontology" in supported_params:
+        kwargs["use_ontology"] = laia_config.get("use_ontology", False)
+    if "use_access_rights" in supported_params:
+        kwargs["use_access_rights"] = laia_config.get("use_access_rights", False)
+    if "add_storage" in supported_params:
+        kwargs["add_storage"] = storage_enabled
+
+    return kwargs
+
+def kill_port_owner(port: int):
+    try:
+        output = subprocess.check_output(f"netstat -ano | findstr :{port}", shell=True).decode()
+        pids = set()
+        for line in output.strip().split("\n"):
+            parts = re.split(r'\s+', line.strip())
+            if len(parts) >= 5 and parts[1].endswith(f":{port}"):
+                pids.add(parts[-1])
+        for pid in pids:
+            if pid and pid != "0" and int(pid) != os.getpid():
+                print(f"Auto-cleanup: Killing process {pid} using port {port}...")
+                subprocess.run(f"taskkill /F /PID {pid}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        pass
+
 async def main():
-    app_instance = await LaiaFastApi(
-        openapi_path,
-        backend_folder_name,
-        db,
-        MongoModelRepository,
-        FastAPIOpenapiRepository,
-        backend_jwt_secret_key,
-    )
+    kill_port_owner(backend_port)
+    app_instance = await LaiaFastApi(**build_laia_fastapi_kwargs())
 
     app = app_instance.api
 
-    from backend.routes import ExtraRoutes
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    from backend.routes import ExtraRoutes, ChatRoutes, BonusRoutes
     app.include_router(ExtraRoutes(app_instance.repository_instance))
+    app.include_router(ChatRoutes(db))
+    app.include_router(BonusRoutes(app_instance.repository_instance))
 
 #    from backend.routes import get_user_router
 #    app.include_router(get_user_router(app_instance.repository_instance))
